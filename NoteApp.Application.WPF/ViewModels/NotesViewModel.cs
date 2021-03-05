@@ -53,6 +53,7 @@ namespace NoteApp.Application.WPF
 				{
 					if (_selectedNote == null)
 					{
+						_model.CurrentNote = (Note)_selectedNote;
 						_selectedNote = new NoteViewModel(value);
 						_selectedNote.Update(value);
 						NotifyPropertyChanged(SELECTED_NOTE_PROPERTY_NAME);

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\INotesModel.cs" />
+    <Compile Include="ViewModels\EditingNoteViewModel.cs" />
     <Compile Include="ViewModels\INotesViewModel.cs" />
     <Compile Include="ViewModels\INoteViewModel.cs" />
     <Compile Include="NoteEventArgs.cs" />

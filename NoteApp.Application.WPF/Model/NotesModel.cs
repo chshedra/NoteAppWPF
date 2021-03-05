@@ -13,6 +13,9 @@ namespace NoteApp.Application.WPF
 		public ObservableCollection<Note> Notes { get; set; }
 
 		/// <inheritdoc/>
+		public Note CurrentNote { get; set; }
+
+		/// <inheritdoc/>
 		public event EventHandler<NoteEventArgs> NoteUpdated;
 
 		/// <summary>

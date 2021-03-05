@@ -6,7 +6,7 @@ namespace NoteApp.Application.WPF
 	/// <summary>
 	/// Модель-представление выбранной заметки
 	/// </summary>
-	class NoteViewModel : Notifier, INoteViewModel
+	public class NoteViewModel : Notifier, INoteViewModel
 	{
 		/// <summary>
 		/// Хранит значение заголовка выбранной заметки

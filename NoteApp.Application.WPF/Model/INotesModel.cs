@@ -15,6 +15,11 @@ namespace NoteApp.Application.WPF
 		ObservableCollection<Note> Notes { get; set; }
 
 		/// <summary>
+		/// Устанавливает и возвращает значение текущей заметки
+		/// </summary>
+		Note CurrentNote { get; set;}
+
+		/// <summary>
 		/// Уведомляет об изменении заметки
 		/// </summary>
 		event EventHandler<NoteEventArgs> NoteUpdated;

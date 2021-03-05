@@ -11,5 +11,10 @@ namespace NoteApp.DataAccess
 		/// Устанавливает и возвращает список объектов класса Note
 		/// </summary>
 		public List<Note> Notes { get; set; } = new List<Note>();
+
+		/// <summary>
+		/// Возвращает и устанавливает значение текущей заметки
+		/// </summary>
+		public Note CurrentNote { get; set; }
 	}
 }
