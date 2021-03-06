@@ -42,9 +42,24 @@ namespace NoteApp.Application.WPF
 		private RelayCommand _addNoteCommand;
 
 		/// <summary>
+		/// Хранит команду редактирования текущей заметки
+		/// </summary>
+		private RelayCommand _editNoteCommand;
+
+		/// <summary>
 		/// Хранит команду удаления заметки
 		/// </summary>
 		private RelayCommand _removeNoteCommand;
+
+		/// <summary>
+		/// Хранит команду выхода из приложения
+		/// </summary>
+		private RelayCommand _exitCommand;
+
+		/// <summary>
+		/// Хранит команду вызова информационного окна
+		/// </summary>
+		private RelayCommand _aboutWindowOpenCommand;
 
 		/// <summary>
 		/// Возвращает список заметок из модели
@@ -77,6 +92,8 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public DateTime SelectedValue
 		{
+			get => SelectedNote.Created;
+
 			set
 			{
 				if (value == DateTime.MinValue)
@@ -84,8 +101,8 @@ namespace NoteApp.Application.WPF
 					return;
 				}
 
-				Note note = GetProject(value);
-				SelectedNote.Update(note);
+				Note note = GetNote(value);
+				SelectedNote = new NoteViewModel(note);
 				_model.CurrentNote = note;
 			}
 		}
@@ -102,7 +119,7 @@ namespace NoteApp.Application.WPF
 				SelectedNotes = value == NoteCategory.All
 					? SelectedNotes = _model.Notes
 					: new ObservableCollection<Note>(_model.Notes.Where(note => note.Category == value)
-						.Select(note => note));
+						.Select(note => note).OrderByDescending(note => note.Created));
 
 				_selectedCategory = value;
 				NotifyPropertyChanged("SelectedNotes");
@@ -142,6 +159,30 @@ namespace NoteApp.Application.WPF
 					       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
 
 					       SelectedValue = _editingNoteViewModel.CurrentNote.Created;
+						  UpdateNoteList();
+				       }));
+			}
+		}
+
+		/// <summary>
+		/// Возвращает команду добавления новой заметки
+		/// </summary>
+		public RelayCommand EditNoteCommand
+		{
+			get
+			{
+				return _editNoteCommand ??
+				       (_editNoteCommand = new RelayCommand(obj =>
+				       {
+					       var note = GetNote(SelectedNote.Created);
+
+					       var editingNoteIndex = SelectedNotes.IndexOf(note);
+					       _editingNoteViewModel = new EditingNoteViewModel(SelectedNote);
+
+					       _model.Notes.Remove(note);
+					       _model.Notes.Insert(editingNoteIndex, 
+						       _editingNoteViewModel.CurrentNote.ConvertToNote());
+						   UpdateNoteList();
 				       }));
 			}
 		}
@@ -168,15 +209,52 @@ namespace NoteApp.Application.WPF
 		}
 
 		/// <summary>
+		/// Возвращает команду закрытия приложения
+		/// </summary>
+		public RelayCommand ExitCommand
+		{
+			get
+			{
+				return _exitCommand ??
+				       (_exitCommand = new RelayCommand(obj =>
+				       {
+					       ProjectManager.SaveToFile(new Project(_model.Notes.ToList(), _model.CurrentNote), 
+						       ProjectManager.DefaultPath);
+
+					       ((MainWindow)obj).Close();
+				       }));
+			}
+		}
+
+		/// <summary>
 		/// Находит заметку по времени создания
 		/// </summary>
 		/// <param name="created"></param>
-		/// <returns></returns>
-		private Note GetProject(DateTime created)
+		/// <returns>Заметка по заданному времени создания</returns>
+		private Note GetNote(DateTime created)
 		{
 			return (from note in SelectedNotes
 				where note.Created == created
 				select note).FirstOrDefault();
+		}
+
+		public void UpdateNoteList()
+		{
+			_model.SortNotes();
+
+			if (SelectedCategory != NoteCategory.All)
+			{
+				SelectedNotes = new ObservableCollection<Note>(_model.Notes.
+					Where(note => note.Category == SelectedCategory)
+					.Select(note => note).OrderByDescending(note => note.Created));
+
+
+			}
+			else
+			{
+				SelectedNotes = _model.Notes;
+			}
+			NotifyPropertyChanged("SelectedNotes");
 		}
 	}
 }

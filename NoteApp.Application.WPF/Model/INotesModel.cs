@@ -20,14 +20,8 @@ namespace NoteApp.Application.WPF
 		Note CurrentNote { get; set;}
 
 		/// <summary>
-		/// Уведомляет об изменении заметки
+		/// Добавляет новую заметку и сортирует список
 		/// </summary>
-		event EventHandler<NoteEventArgs> NoteUpdated;
-
-		/// <summary>
-		/// Обновляет данные заметки
-		/// </summary>
-		/// <param name="updatedNote"></param>
-		void UpdateNote(INote updatedNote);
+		void SortNotes();
 	}
 }

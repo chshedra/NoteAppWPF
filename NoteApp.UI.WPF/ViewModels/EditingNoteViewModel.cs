@@ -49,7 +49,8 @@ namespace NoteApp.Application.WPF
 				return _okCommand ??
 				       (_okCommand = new RelayCommand(obj =>
 				       {
-					       var window = obj as EditWindow;
+						   CurrentNote.Modified = DateTime.Now;
+						   var window = obj as EditWindow;
 					       window.DialogResult = true;
 					       window.Close();
 				       }));

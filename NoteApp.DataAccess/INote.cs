@@ -30,12 +30,7 @@ namespace NoteApp.DataAccess
 		/// <summary>
 		/// Возвращает и устанавливает время изменения заметки
 		/// </summary>
-		DateTime Modified { get; }
+		DateTime Modified { get; set; }
 
-		/// <summary>
-		/// Обновляет заметку
-		/// </summary>
-		/// <param name="note">Обновляемая заметка</param>
-		void Update(INote note);
 	}
 }

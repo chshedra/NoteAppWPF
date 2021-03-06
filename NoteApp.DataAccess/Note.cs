@@ -76,17 +76,7 @@ namespace NoteApp.DataAccess
         public DateTime Created { get; private set; }
 
         /// <inheritdoc/>
-        public DateTime Modified { get; private set; }
-
-        /// <inheritdoc/>
-        public void Update(INote note)
-        {
-	        Title = note.Title;
-	        Text = note.Text;
-	        Category = note.Category;
-	        Created = note.Created;
-	        Modified = note.Modified;
-        }
+        public DateTime Modified { get;  set; }
 
         /// <summary>
         /// Метод, создающий копию объекта класса

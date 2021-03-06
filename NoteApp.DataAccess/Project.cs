@@ -16,5 +16,18 @@ namespace NoteApp.DataAccess
 		/// Возвращает и устанавливает значение текущей заметки
 		/// </summary>
 		public Note CurrentNote { get; set; }
+
+		/// <summary>
+		/// Конструктор класса Project
+		/// </summary>
+		/// <param name="notes"> Список заметок</param>
+		/// <param name="currentNote">Текущая заметка</param>
+		public Project(List<Note> notes, Note currentNote)
+		{
+			Notes = notes;
+			CurrentNote = currentNote;
+		}
+
+		public Project() : this(new List<Note>(), new Note()) { }
 	}
 }

@@ -6,6 +6,7 @@
 	xmlns:local="clr-namespace:NoteAppWPF"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	Title="MainWindow"
+	Name="Window"
 	Width="800"
 	Height="450"
 	Icon="Resources/icon.ico"
@@ -16,12 +17,20 @@
 	<DockPanel>
 		<Menu Height="20" DockPanel.Dock="Top">
 			<MenuItem Name="FileMenuItem" Header="File">
-				<MenuItem Name="ExitMenuItem" Header="Exit" />
+				<MenuItem Name="ExitMenuItem" Header="Exit"
+				          Command="{Binding ExitCommand}"
+				          CommandParameter="{Binding ElementName=Window}"/>
 			</MenuItem>
 			<MenuItem Name="EditHeadMenuItem" Header="Edit">
-				<MenuItem Name="AddMenuItem" Header="Add" />
-				<MenuItem Name="EditMenuItem" Header="Edit" />
-				<MenuItem Name="RemoveMenuItem" Header="Remove" />
+				<MenuItem Name="AddMenuItem" Header="Add" 
+				          Command="{Binding AddNoteCommand}"
+				          CommandParameter="{Binding ElementName=Window}"/>
+				<MenuItem Name="EditMenuItem" Header="Edit"
+				          Command ="{Binding EditNoteCommand}"
+				          CommandParameter="{Binding ElementName=Window}"/>
+				<MenuItem Name="RemoveMenuItem" Header="Remove"
+				          Command="{Binding RemoveNoteCommand}"
+				          CommandParameter="{Binding ElementName=Window}"/>
 			</MenuItem>
 			<MenuItem Name="HelpMenuItem" Header="Help">
 				<MenuItem Name="AboutMenuItem" Header="About" />
@@ -76,11 +85,13 @@
 						<Button
 							Name="AddButton"
 							Command="{Binding AddNoteCommand}"
-							CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
 							Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_add (1).png" Stretch="Uniform" />
 						</Button>
-						<Button Name="EditButton" Style="{StaticResource EditingButton}">
+						<Button
+							Name="EditButton"
+							Command="{Binding EditNoteCommand}"
+							Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_edit (1).png" />
 						</Button>
 						<Button

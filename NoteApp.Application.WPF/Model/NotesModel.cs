@@ -9,35 +9,37 @@ namespace NoteApp.Application.WPF
 
 	public class NotesModel : INotesModel
 	{
+		private ObservableCollection<Note> _notes;
+
 		/// <inheritdoc/>
-		public ObservableCollection<Note> Notes { get; set; }
+		public ObservableCollection<Note> Notes
+		{
+			get => _notes;
+
+			set => _notes = value;
+		}
 
 		/// <inheritdoc/>
 		public Note CurrentNote { get; set; }
-
-		/// <inheritdoc/>
-		public event EventHandler<NoteEventArgs> NoteUpdated;
 
 		/// <summary>
 		/// Создает объект модели и загружает данные из хранилища
 		/// </summary>
 		public NotesModel()
 		{
-			Notes = new ObservableCollection<Note>();
+			_notes = new ObservableCollection<Note>();
+
+			CurrentNote = ProjectManager.LoadFromFile(ProjectManager.DefaultPath).CurrentNote;
 			foreach (Note note
 				in ProjectManager.LoadFromFile(ProjectManager.DefaultPath).Notes)
 			{
-				Notes.Add(note);
+				_notes.Add(note);
 			}
 		}
 
-		/// <inheritdoc/>
-		public void UpdateNote(INote updatedNote)
+		public void SortNotes()
 		{
-			//GetNote(updatedNote.Created).Update(updatedNote);
-			NoteUpdated(this,
-				new NoteEventArgs(updatedNote));
-
+			Notes = new ObservableCollection<Note>(_notes.OrderByDescending(note => note.Created));
 		}
 
 		/// <summary>
