@@ -34,8 +34,7 @@ namespace NoteApp.Application.WPF
 		/// <inheritdoc/>
 		public void UpdateNote(INote updatedNote)
 		{
-			GetNote(updatedNote.Created)
-				.Update(updatedNote);
+			//GetNote(updatedNote.Created).Update(updatedNote);
 			NoteUpdated(this,
 				new NoteEventArgs(updatedNote));
 

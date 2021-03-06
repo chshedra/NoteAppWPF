@@ -9,11 +9,9 @@ namespace NoteAppWPF
 	/// </summary>
 	public partial class EditWindow : Window
 	{
-		public EditWindow(INotesModel notesModel)
+		public EditWindow()
 		{
 			InitializeComponent();
-
-			DataContext = new EditingNoteViewModel(notesModel);
 		}
 	}
 }

@@ -38,7 +38,7 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public string Title
 		{
-			get { return _title;}
+			get => _title;
 
 			set
 			{
@@ -52,7 +52,7 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public string Text
 		{
-			get { return _text;}
+			get => _text;
 			set
 			{
 				_text = value;
@@ -65,7 +65,7 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public NoteCategory Category
 		{
-			get { return _category; }
+			get => _category; 
 			set
 			{
 				_category = value;
@@ -78,7 +78,8 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public DateTime Created
 		{
-			get { return _created; }
+			get => _created;
+
 			set
 			{
 				_created = value;
@@ -91,7 +92,7 @@ namespace NoteApp.Application.WPF
 		/// </summary>
 		public DateTime Modified
 		{
-			get { return _modified; }
+			get => _modified; 
 
 			set
 			{
@@ -110,7 +111,7 @@ namespace NoteApp.Application.WPF
 			{
 				return;
 			}
-			Created = note.Created;
+
 			Update(note);
 		}
 
@@ -126,5 +127,9 @@ namespace NoteApp.Application.WPF
 			Created = note.Created;
 			Modified = note.Modified;
 		}
+
+		/// <inheritdoc/>
+		public Note ConvertToNote() => 
+			new Note(this.Title, this.Text, this.Category, this.Created, this.Modified);
 	}
 }

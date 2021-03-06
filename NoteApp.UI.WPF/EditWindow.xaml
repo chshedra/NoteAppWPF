@@ -8,6 +8,7 @@
 	Title="EditWindow"
 	Width="650"
 	Height="450"
+	Name="Window"
 	Icon="Resources/icon.ico"
 	mc:Ignorable="d">
 	<Grid Margin="6">
@@ -49,7 +50,8 @@
 			Grid.ColumnSpan="3"
 			Height="25"
 			Margin="3"
-			VerticalAlignment="Center" />
+			VerticalAlignment="Center"
+			Text="{Binding CurrentNote.Title}" />
 		<ComboBox
 			Name="EditingCategoryComboBox"
 			Grid.Row="1"
@@ -57,13 +59,17 @@
 			Grid.ColumnSpan="2"
 			Width="150"
 			Margin="3"
-			HorizontalAlignment="Left" />
+			HorizontalAlignment="Left"
+			ItemsSource="{Binding Categories}"
+			SelectedItem="{Binding CurrentNote.Category}" />
 		<DatePicker
-			Name ="CreatedDatePicker"
+			Name="CreatedDatePicker"
 			Grid.Row="2"
 			Grid.Column="1"
 			Margin="3"
-			HorizontalAlignment="Left" />
+			HorizontalAlignment="Left"
+			IsEnabled="False"
+			SelectedDate="{Binding CurrentNote.Created}" />
 		<TextBlock
 			Grid.Row="2"
 			Grid.Column="2"
@@ -75,16 +81,19 @@
 			Grid.Row="2"
 			Grid.Column="3"
 			Margin="3"
-			HorizontalAlignment="Left" />
+			HorizontalAlignment="Left"
+			IsEnabled="False"
+			SelectedDate="{Binding CurrentNote.Modified}" />
 		<TextBox
-			Name ="EditingNoteTextBox"
+			Name="EditingNoteTextBox"
 			Grid.Row="3"
 			Grid.Column="0"
 			Grid.ColumnSpan="4"
 			Margin="3"
-			VerticalScrollBarVisibility="Visible"
 			AcceptsReturn="True"
-			AcceptsTab ="True"/>
+			AcceptsTab="True"
+			Text="{Binding CurrentNote.Text}"
+			VerticalScrollBarVisibility="Visible" />
 		<StackPanel
 			Grid.Row="4"
 			Grid.Column="3"
@@ -95,13 +104,16 @@
 				Name="CancelButton"
 				Width="60"
 				Margin="3"
-				Content="Cancel" />
+				Content="Cancel" 
+				Command="{Binding CancelCommand}"
+				CommandParameter="{Binding ElementName=Window}"/>
 			<Button
 				Name="OkButton"
 				Width="60"
 				Margin="3"
-				Content="OK" />
+				Content="OK" 
+				Command="{Binding OkCommand}"
+				CommandParameter="{Binding ElementName=Window}"/>
 		</StackPanel>
-
 	</Grid>
 </Window>

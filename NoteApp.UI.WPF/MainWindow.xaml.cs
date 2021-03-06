@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 using NoteApp.Application.WPF;
 
 namespace NoteAppWPF
@@ -8,21 +9,12 @@ namespace NoteAppWPF
 	/// </summary>
 	public partial class MainWindow : Window
 	{
-		private NotesModel _notesModel;
 		public MainWindow()
 		{
 			InitializeComponent();
 
-			_notesModel = new NotesModel();
-			this.DataContext = new NotesViewModel(_notesModel);
+			this.DataContext = new NotesViewModel(new NotesModel());
 			NotesListBox.SelectedIndex = 0;
-		}
-
-		private void EditButton_Click(object sender,
-			RoutedEventArgs e)
-		{ 
-			EditWindow editWindow = new EditWindow(_notesModel);
-			editWindow.Show();
 		}
 	}
 }

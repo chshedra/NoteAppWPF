@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Windows.Input;
 using NoteApp.DataAccess;
+using NoteAppWPF;
 
 namespace NoteApp.Application.WPF
 {
@@ -21,6 +22,11 @@ namespace NoteApp.Application.WPF
 		private readonly INotesModel _model;
 
 		/// <summary>
+		/// Хранит модель представления окна редактирования
+		/// </summary>
+		private EditingNoteViewModel _editingNoteViewModel;
+
+		/// <summary>
 		/// Хранит значение выбранной заметки
 		/// </summary>
 		private INoteViewModel _selectedNote;
@@ -31,6 +37,16 @@ namespace NoteApp.Application.WPF
 		private NoteCategory _selectedCategory;
 
 		/// <summary>
+		/// Хранит команду добавления заметки
+		/// </summary>
+		private RelayCommand _addNoteCommand;
+
+		/// <summary>
+		/// Хранит команду удаления заметки
+		/// </summary>
+		private RelayCommand _removeNoteCommand;
+
+		/// <summary>
 		/// Возвращает список заметок из модели
 		/// </summary>
 		public ObservableCollection<Note> SelectedNotes { get; set; }
@@ -38,10 +54,7 @@ namespace NoteApp.Application.WPF
 		/// <inheritdoc/>
 		public INoteViewModel SelectedNote
 		{
-			get
-			{
-				return _selectedNote;
-			}
+			get => _selectedNote;
 
 			set
 			{
@@ -51,13 +64,9 @@ namespace NoteApp.Application.WPF
 				}
 				else
 				{
-					if (_selectedNote == null)
-					{
-						_model.CurrentNote = (Note)_selectedNote;
-						_selectedNote = new NoteViewModel(value);
-						_selectedNote.Update(value);
-						NotifyPropertyChanged(SELECTED_NOTE_PROPERTY_NAME);
-					}
+					_selectedNote = new NoteViewModel(value);
+					NotifyPropertyChanged(SELECTED_NOTE_PROPERTY_NAME);
+					_model.CurrentNote = _selectedNote.ConvertToNote();
 				}
 			}
 		}
@@ -71,16 +80,13 @@ namespace NoteApp.Application.WPF
 			set
 			{
 				if (value == DateTime.MinValue)
+				{
 					return;
+				}
+
 				Note note = GetProject(value);
-				if (SelectedNote == null)
-				{
-					SelectedNote = new NoteViewModel(note);
-				}
-				else
-				{
-					SelectedNote.Update(note);
-				}
+				SelectedNote.Update(note);
+				_model.CurrentNote = note;
 			}
 		}
 
@@ -118,29 +124,46 @@ namespace NoteApp.Application.WPF
 		public NotesViewModel(INotesModel notesModel)
 		{
 			_model = notesModel;
-			_model.NoteUpdated += model_ProjectUpdated;
 			SelectedCategory = NoteCategory.All;
 		}
 
-		/// <inheritdoc/>
-		public void UpdateNote()
+		/// <summary>
+		/// Возвращает команду добавления новой заметки
+		/// </summary>
+		public RelayCommand AddNoteCommand
 		{
-			_model.UpdateNote(SelectedNote);
+			get
+			{
+				return _addNoteCommand ??
+				       (_addNoteCommand = new RelayCommand(obj =>
+				       {
+					       _editingNoteViewModel = new EditingNoteViewModel(new NoteViewModel(new Note()));
+
+					       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
+
+					       SelectedValue = _editingNoteViewModel.CurrentNote.Created;
+				       }));
+			}
 		}
 
+
 		/// <summary>
-		/// Вызывает метод обновления выбранной заметки по команде
+		/// Возвращает команду удаления выбранной заметки
 		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void model_ProjectUpdated(object sender,
-			NoteEventArgs e)
+		public RelayCommand RemoveCommand
 		{
-			GetProject(e.Note.Created).Update(e.Note);
-			if (SelectedNote != null
-			    && e.Note.Created == SelectedNote.Created)
+			get
 			{
-				SelectedNote.Update(e.Note);
+				return _removeNoteCommand ??
+				       (_removeNoteCommand = new RelayCommand(obj =>
+				       {
+					       _model.Notes.Remove(_model.CurrentNote);
+					       if (_model.Notes.Count != 0)
+					       {
+						       SelectedNote =new NoteViewModel(_model.Notes[0]);
+						       _model.CurrentNote = _model.Notes[0];
+					       }
+				       }));
 			}
 		}
 

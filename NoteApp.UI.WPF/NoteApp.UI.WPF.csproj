@@ -55,6 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EditingNoteViewModel.cs" />
+    <Compile Include="ViewModels\INotesViewModel.cs" />
+    <Compile Include="ViewModels\INoteViewModel.cs" />
+    <Compile Include="ViewModels\NotesViewModel.cs" />
+    <Compile Include="ViewModels\NoteViewModel.cs" />
     <Page Include="AboutWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +129,10 @@
     <ProjectReference Include="..\NoteApp.Application.WPF\NoteApp.Application.WPF.csproj">
       <Project>{ac0ebaec-63d3-42f0-896b-b229262c8ece}</Project>
       <Name>NoteApp.Application.WPF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NoteApp.DataAccess\NoteApp.DataAccess.csproj">
+      <Project>{abc33dc8-5e28-4993-bf80-fc00f75ff791}</Project>
+      <Name>NoteApp.DataAccess</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

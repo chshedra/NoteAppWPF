@@ -11,10 +11,5 @@ namespace NoteApp.Application.WPF
 		/// Возвращает и устанавливает значение выбранной заметки
 		/// </summary>
 		INoteViewModel SelectedNote { get; set; }
-
-		/// <summary>
-		/// Обновляет содержимое заметки
-		/// </summary>
-		void UpdateNote();
 	}
 }

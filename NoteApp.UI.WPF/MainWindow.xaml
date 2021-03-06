@@ -33,8 +33,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			<ScrollViewer HorizontalScrollBarVisibility="Auto" 
-			              VerticalScrollBarVisibility="Hidden">
+			<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
 				<Grid Grid.Column="0" Margin="3">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="90" />
@@ -58,33 +57,36 @@
 						Margin="3"
 						HorizontalAlignment="Stretch"
 						ItemsSource="{Binding Categories}"
-						SelectedValue="{Binding SelectedCategory}"/>
+						SelectedValue="{Binding SelectedCategory}" />
 					<ListBox
-                        Name="NotesListBox"
-                        Grid.Row="1"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="2"
-                        Margin="3"
-                        DisplayMemberPath="Title"
-                        ItemsSource="{Binding SelectedNotes}"
-                        SelectedValue="{Binding Path=SelectedValue, Mode=OneWayToSource}"
-                        SelectedValuePath="Created"/>
+						Name="NotesListBox"
+						Grid.Row="1"
+						Grid.Column="0"
+						Grid.ColumnSpan="2"
+						Margin="3"
+						DisplayMemberPath="Title"
+						ItemsSource="{Binding SelectedNotes}"
+						SelectedValue="{Binding Path=SelectedValue, Mode=TwoWay}"
+						SelectedValuePath="Created" />
 					<StackPanel
 						Grid.Row="2"
 						Grid.Column="0"
 						Grid.ColumnSpan="2"
 						Orientation="Horizontal">
-						<Button Name="AddButton" Style="{StaticResource EditingButton}">
+						<Button
+							Name="AddButton"
+							Command="{Binding AddNoteCommand}"
+							CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+							Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_add (1).png" Stretch="Uniform" />
 						</Button>
-						<Button
-							Name="EditButton"
-							Click="EditButton_Click"
-							Style="{StaticResource EditingButton}">
+						<Button Name="EditButton" Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_edit (1).png" />
 						</Button>
-						<Button Name="RemoveButton" Style="{StaticResource EditingButton}"
-						        >
+						<Button
+							Name="RemoveButton"
+							Command="{Binding RemoveCommand}"
+							Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_delete (1).png" />
 						</Button>
 					</StackPanel>
@@ -134,8 +136,8 @@
 						<DatePicker
 							Name="CreatedDatePicker"
 							Margin="3"
-							SelectedDate="{Binding SelectedNote.Created}"
-							IsEnabled="False" />
+							IsEnabled="False"
+							SelectedDate="{Binding SelectedNote.Created}" />
 						<TextBlock
 							Margin="3"
 							VerticalAlignment="Center"
@@ -143,8 +145,8 @@
 						<DatePicker
 							Name="ModifiedDatePicker"
 							Margin="3"
-							SelectedDate = "{Binding SelectedNote.Modified}"
-							IsEnabled="False" />
+							IsEnabled="False"
+							SelectedDate="{Binding SelectedNote.Modified}" />
 					</StackPanel>
 					<TextBox
 						Name="SelectedNoteTextBox"
