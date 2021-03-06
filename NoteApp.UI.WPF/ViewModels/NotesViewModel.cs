@@ -2,12 +2,11 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Sockets;
-using System.Windows.Input;
+using NoteApp.Application.WPF;
+using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
-using NoteAppWPF;
 
-namespace NoteApp.Application.WPF
+namespace NoteAppWPF.ViewModels
 {
 	public class NotesViewModel : Notifier, INotesViewModel
 	{
@@ -205,6 +204,22 @@ namespace NoteApp.Application.WPF
 						       _model.CurrentNote = _model.Notes[0];
 					       }
 				       }));
+			}
+		}
+
+		/// <summary>
+		/// Возвращает команду вызова информационного окна
+		/// </summary>
+		public RelayCommand AboutCommand
+		{
+			get
+			{
+				return _aboutWindowOpenCommand ??
+				       (_aboutWindowOpenCommand = new RelayCommand(obj =>
+					       {
+						       var window = new AboutWindow();
+					       }
+				       ));
 			}
 		}
 

@@ -1,7 +1,8 @@
 ﻿using System;
+using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
 
-namespace NoteApp.Application.WPF
+namespace NoteAppWPF.ViewModels
 {
 	/// <summary>
 	/// Модель-представление выбранной заметки

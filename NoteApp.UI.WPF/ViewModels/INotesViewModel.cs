@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace NoteApp.Application.WPF
+namespace NoteAppWPF.ViewModels
 {
 	/// <summary>
 	/// Модель представления списка заметок

@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using NoteApp.DataAccess;
 
-namespace NoteApp.Application.WPF
+namespace NoteApp.Application.WPF.Model
 {
 	/// <summary>
 	/// Модель с бизнес-логикой программы

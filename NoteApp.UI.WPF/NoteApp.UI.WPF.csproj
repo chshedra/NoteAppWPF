@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Notifier.cs" />
+    <Compile Include="RelayCommand.cs" />
+    <Compile Include="ViewModels\AboutInfoViewModel.cs" />
     <Compile Include="ViewModels\EditingNoteViewModel.cs" />
     <Compile Include="ViewModels\INotesViewModel.cs" />
     <Compile Include="ViewModels\INoteViewModel.cs" />

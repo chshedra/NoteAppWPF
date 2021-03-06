@@ -1,6 +1,6 @@
 ﻿using NoteApp.DataAccess;
 
-namespace NoteApp.Application.WPF
+namespace NoteAppWPF.ViewModels
 {
 	/// <summary>
 	/// Модель представления выьранной заметки

@@ -5,7 +5,7 @@ using System.Linq;
 using NoteApp.DataAccess;
 using NoteAppWPF;
 
-namespace NoteApp.Application.WPF
+namespace NoteAppWPF.ViewModels
 {
 	public class EditingNoteViewModel
 	{

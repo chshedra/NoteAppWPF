@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using NoteApp.DataAccess;
 
-namespace NoteApp.Application.WPF
+namespace NoteApp.Application.WPF.Model
 {
 	/// <inheritdoc/>
 

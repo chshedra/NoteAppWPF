@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using NoteApp.Application.WPF;
+using NoteApp.Application.WPF.Model;
+using NoteAppWPF.ViewModels;
 
 namespace NoteAppWPF
 {
