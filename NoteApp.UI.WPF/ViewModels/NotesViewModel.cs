@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
-using NoteApp.Application.WPF;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
 
@@ -11,11 +10,6 @@ namespace NoteAppWPF.ViewModels
 {
 	public class NotesViewModel : Notifier, INotesViewModel
 	{
-		/// <summary>
-		/// Хранит имя свойства выбранной заметки
-		/// </summary>
-		public const string SELECTED_NOTE_PROPERTY_NAME = "SelectedNote";
-
 		/// <summary>
 		/// Хранит объект модели 
 		/// </summary>
@@ -80,7 +74,7 @@ namespace NoteAppWPF.ViewModels
 				else
 				{
 					_selectedNote = new NoteViewModel(value);
-					NotifyPropertyChanged(SELECTED_NOTE_PROPERTY_NAME);
+					NotifyPropertyChanged(nameof(SelectedNote));
 					_model.CurrentNote = _selectedNote.ConvertToNote();
 				}
 			}
@@ -122,9 +116,9 @@ namespace NoteAppWPF.ViewModels
 						.Select(note => note).OrderByDescending(note => note.Created));
 
 				_selectedCategory = value;
-				NotifyPropertyChanged("SelectedNotes");
+				NotifyPropertyChanged(nameof(SelectedNotes));
 				SelectedNote = new NoteViewModel(SelectedNotes[0]);
-				NotifyPropertyChanged("SelectedNote");
+				NotifyPropertyChanged(nameof(SelectedNote));
 			}
 		}
 
@@ -193,7 +187,6 @@ namespace NoteAppWPF.ViewModels
 			}
 		}
 
-
 		/// <summary>
 		/// Возвращает команду удаления выбранной заметки
 		/// </summary>
@@ -248,7 +241,10 @@ namespace NoteAppWPF.ViewModels
 					       ProjectManager.SaveToFile(new Project(_model.Notes.ToList(), _model.CurrentNote), 
 						       ProjectManager.DefaultPath);
 
-					       ((MainWindow)obj).Close();
+					       if (obj != null)
+					       {
+						       ((MainWindow) obj).Close();
+					       }
 				       }));
 			}
 		}
@@ -284,7 +280,7 @@ namespace NoteAppWPF.ViewModels
 			{
 				SelectedNotes = _model.Notes;
 			}
-			NotifyPropertyChanged("SelectedNotes");
+			NotifyPropertyChanged(nameof(SelectedNote));
 		}
 	}
 }

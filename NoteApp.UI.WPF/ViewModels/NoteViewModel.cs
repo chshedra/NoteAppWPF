@@ -45,7 +45,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_title = value;
-				NotifyPropertyChanged("Title");
+				NotifyPropertyChanged(nameof(Title));
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_text = value;
-				NotifyPropertyChanged("Text");
+				NotifyPropertyChanged(nameof(Text));
 			}
 		}
 
@@ -71,7 +71,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_category = value;
-				NotifyPropertyChanged("Category");
+				NotifyPropertyChanged(nameof(Category));
 			}
 		}
 
@@ -85,7 +85,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_created = value;
-				NotifyPropertyChanged("Created");
+				NotifyPropertyChanged(nameof(Created));
 			}
 		}
 
