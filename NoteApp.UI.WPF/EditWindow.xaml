@@ -138,7 +138,7 @@
 				Width="60"
 				Margin="3"
 				Command="{Binding OkCommand}"
-				CommandParameter="{Binding ElementName=Window}"
+				CommandParameter="{Binding Path=(Validation.HasError), ElementName=EditingTitleTextBox, Mode=OneWay}"
 				Content="OK" />
 		</StackPanel>
 	</Grid>

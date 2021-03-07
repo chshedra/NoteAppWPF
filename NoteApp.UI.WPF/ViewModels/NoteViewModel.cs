@@ -99,7 +99,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_modified = value;
-				NotifyPropertyChanged("Modified");
+				NotifyPropertyChanged(nameof(Modified));
 			}
 		}
 

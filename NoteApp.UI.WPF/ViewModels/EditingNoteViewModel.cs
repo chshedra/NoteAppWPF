@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Windows;
 using NoteApp.DataAccess;
 using NoteAppWPF;
 
@@ -23,6 +24,8 @@ namespace NoteAppWPF.ViewModels
 		/// Хранит команду отмены операции с заметкой
 		/// </summary>
 		private RelayCommand _cancelCommand;
+
+		private EditWindow _editWindow;
 
 		/// <summary>
 		/// Возвращает и устанавливает значение редактируемой/создаваемой заметки
@@ -54,10 +57,21 @@ namespace NoteAppWPF.ViewModels
 				return _okCommand ??
 				       (_okCommand = new RelayCommand(obj =>
 				       {
-						   CurrentNote.Modified = DateTime.Now;
-						   IsChangesAccepted = true;
-						   var window = obj as EditWindow;
-						   window.Close();
+					       var isError = (bool)obj;
+
+					       if (isError)
+					       {
+						       MessageBox.Show("Invalid values",
+							       "Warning",
+							       MessageBoxButton.OK,
+							       MessageBoxImage.Warning);
+					       }
+					       else
+					       {
+						       CurrentNote.Modified = DateTime.Now;
+						       IsChangesAccepted = true;
+						       _editWindow.Close();
+					       }
 				       }));
 			}
 		}
@@ -73,7 +87,7 @@ namespace NoteAppWPF.ViewModels
 				       (_cancelCommand = new RelayCommand(obj =>
 				       {
 						   IsChangesAccepted = false;
-					       ((EditWindow)obj).Close();
+						   _editWindow.Close();
 				       }));
 			}
 		}
@@ -86,12 +100,12 @@ namespace NoteAppWPF.ViewModels
 		{
 			CurrentNote = note;
 
-			EditWindow editWindow = new EditWindow
+			_editWindow = new EditWindow
 			{
 				DataContext = this
 			};
 
-			editWindow.ShowDialog();
+			_editWindow.ShowDialog();
 		}
 	}
 
