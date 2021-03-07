@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using NoteApp.Application.WPF;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
@@ -58,7 +59,7 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Хранит команду вызова информационного окна
 		/// </summary>
-		private RelayCommand _aboutWindowOpenCommand;
+		private RelayCommand _aboutWindowCommand;
 
 		/// <summary>
 		/// Возвращает список заметок из модели
@@ -89,18 +90,18 @@ namespace NoteAppWPF.ViewModels
 		/// Устанвливает значение выбранной заметки из NotesListBox по
 		/// дате создания
 		/// </summary>
-		public DateTime SelectedValue
+		public Note SelectedValue
 		{
-			get => SelectedNote.Created;
+			get => SelectedNote.ConvertToNote();
 
 			set
 			{
-				if (value == DateTime.MinValue)
+				if (value.Created == DateTime.MinValue)
 				{
 					return;
 				}
 
-				Note note = GetNote(value);
+				Note note = GetNote(value.Created);
 				SelectedNote = new NoteViewModel(note);
 				_model.CurrentNote = note;
 			}
@@ -155,10 +156,12 @@ namespace NoteAppWPF.ViewModels
 				       {
 					       _editingNoteViewModel = new EditingNoteViewModel(new NoteViewModel(new Note()));
 
-					       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
-
-					       SelectedValue = _editingNoteViewModel.CurrentNote.Created;
-						  UpdateNoteList();
+					       if (_editingNoteViewModel.IsChangesAccepted)
+					       {
+						       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
+						       SelectedValue = _editingNoteViewModel.CurrentNote.ConvertToNote();
+						       UpdateNoteList();
+					       }
 				       }));
 			}
 		}
@@ -173,15 +176,19 @@ namespace NoteAppWPF.ViewModels
 				return _editNoteCommand ??
 				       (_editNoteCommand = new RelayCommand(obj =>
 				       {
-					       var note = GetNote(SelectedNote.Created);
-
-					       var editingNoteIndex = SelectedNotes.IndexOf(note);
+						   var note = GetNote(SelectedNote.Created);
 					       _editingNoteViewModel = new EditingNoteViewModel(SelectedNote);
 
-					       _model.Notes.Remove(note);
-					       _model.Notes.Insert(editingNoteIndex, 
-						       _editingNoteViewModel.CurrentNote.ConvertToNote());
-						   UpdateNoteList();
+					       if (_editingNoteViewModel.IsChangesAccepted)
+					       {
+						       var editingNoteIndex = SelectedNotes.IndexOf(note);
+						       _model.Notes.Insert(editingNoteIndex + 1,
+							       _editingNoteViewModel.CurrentNote.ConvertToNote());
+							   SelectedNote = _editingNoteViewModel.CurrentNote;
+
+						       _model.Notes.Remove(note);
+							   UpdateNoteList();
+					       }
 				       }));
 			}
 		}
@@ -190,19 +197,23 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Возвращает команду удаления выбранной заметки
 		/// </summary>
-		public RelayCommand RemoveCommand
+		public RelayCommand RemoveNoteCommand
 		{
 			get
 			{
 				return _removeNoteCommand ??
 				       (_removeNoteCommand = new RelayCommand(obj =>
 				       {
-					       _model.Notes.Remove(_model.CurrentNote);
-					       if (_model.Notes.Count != 0)
-					       {
-						       SelectedNote =new NoteViewModel(_model.Notes[0]);
-						       _model.CurrentNote = _model.Notes[0];
-					       }
+						  if(MessageBox.Show("Do you really want remove this note?",
+							   "Note removing", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+						   {
+							   _model.Notes.Remove(_model.CurrentNote);
+							   if (_model.Notes.Count != 0)
+							   {
+								   SelectedNote = new NoteViewModel(_model.Notes[0]);
+								   _model.CurrentNote = _model.Notes[0];
+							   }
+						   }
 				       }));
 			}
 		}
@@ -210,14 +221,15 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Возвращает команду вызова информационного окна
 		/// </summary>
-		public RelayCommand AboutCommand
+		public RelayCommand AboutWindowCommand
 		{
 			get
 			{
-				return _aboutWindowOpenCommand ??
-				       (_aboutWindowOpenCommand = new RelayCommand(obj =>
+				return _aboutWindowCommand ??
+				       (_aboutWindowCommand = new RelayCommand(obj =>
 					       {
 						       var window = new AboutWindow();
+							   window.Show();
 					       }
 				       ));
 			}
@@ -253,6 +265,9 @@ namespace NoteAppWPF.ViewModels
 				select note).FirstOrDefault();
 		}
 
+		/// <summary>
+		/// Обновляет список ListBox после изменений
+		/// </summary>
 		public void UpdateNoteList()
 		{
 			_model.SortNotes();

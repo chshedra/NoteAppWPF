@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
 
@@ -7,7 +8,7 @@ namespace NoteAppWPF.ViewModels
 	/// <summary>
 	/// Модель-представление выбранной заметки
 	/// </summary>
-	public class NoteViewModel : Notifier, INoteViewModel
+	public class NoteViewModel : Notifier, INoteViewModel, IDataErrorInfo
 	{
 		/// <summary>
 		/// Хранит значение заголовка выбранной заметки
@@ -115,6 +116,25 @@ namespace NoteAppWPF.ViewModels
 
 			Update(note);
 		}
+
+		public string this[string columnName]
+		{
+			get
+			{
+				string error = String.Empty;
+				switch (columnName)
+				{
+					case nameof(Title):
+						if (Title.Length > 50)
+						{
+							return "Размер заголовка должен быть не более 50 символов";
+						}
+						break;
+				}
+				return error;
+			}
+		}
+		public string Error => throw new NotImplementedException();
 
 		/// <summary>
 		/// Обновляет свойства выбранной заметки

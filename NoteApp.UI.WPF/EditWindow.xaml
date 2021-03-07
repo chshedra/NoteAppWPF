@@ -5,12 +5,30 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:local="clr-namespace:NoteAppWPF"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	Name="Window"
 	Title="EditWindow"
 	Width="650"
 	Height="450"
-	Name="Window"
 	Icon="Resources/icon.ico"
 	mc:Ignorable="d">
+	<Window.Resources>
+		<Style x:Key="ErrorValidationStyle">
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="True">
+					<Setter Property="TextBox.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+					<Setter Property="TextBox.ToolTip" Value="Test"></Setter>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style TargetType="Button">
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="True">
+					<Setter Property="IsEnabled" Value="False"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+
+	</Window.Resources>
 	<Grid Margin="6">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto" />
@@ -51,7 +69,15 @@
 			Height="25"
 			Margin="3"
 			VerticalAlignment="Center"
-			Text="{Binding CurrentNote.Title}" />
+			Style="{StaticResource ErrorValidationStyle}">
+			<TextBox.Text>
+				<Binding Path="CurrentNote.Title" UpdateSourceTrigger="PropertyChanged">
+					<Binding.ValidationRules>
+						<DataErrorValidationRule />
+					</Binding.ValidationRules>
+				</Binding>
+			</TextBox.Text>
+		</TextBox>
 		<ComboBox
 			Name="EditingCategoryComboBox"
 			Grid.Row="1"
@@ -104,16 +130,16 @@
 				Name="CancelButton"
 				Width="60"
 				Margin="3"
-				Content="Cancel" 
 				Command="{Binding CancelCommand}"
-				CommandParameter="{Binding ElementName=Window}"/>
+				CommandParameter="{Binding ElementName=Window}"
+				Content="Cancel" />
 			<Button
 				Name="OkButton"
 				Width="60"
 				Margin="3"
-				Content="OK" 
 				Command="{Binding OkCommand}"
-				CommandParameter="{Binding ElementName=Window}"/>
+				CommandParameter="{Binding ElementName=Window}"
+				Content="OK" />
 		</StackPanel>
 	</Grid>
 </Window>

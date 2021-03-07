@@ -40,6 +40,11 @@ namespace NoteAppWPF.ViewModels
 			Enum.GetValues(typeof(NoteCategory)).Cast<NoteCategory>();
 
 		/// <summary>
+		/// Возвращает и устанавливает флаг, приняты ли внесенные изменения
+		/// </summary>
+		public bool IsChangesAccepted { get; set; }
+
+		/// <summary>
 		/// Возвращает команду успешного завершения операции с заметкой
 		/// </summary>
 		public RelayCommand OkCommand
@@ -50,9 +55,9 @@ namespace NoteAppWPF.ViewModels
 				       (_okCommand = new RelayCommand(obj =>
 				       {
 						   CurrentNote.Modified = DateTime.Now;
+						   IsChangesAccepted = true;
 						   var window = obj as EditWindow;
-					       window.DialogResult = true;
-					       window.Close();
+						   window.Close();
 				       }));
 			}
 		}
@@ -67,6 +72,7 @@ namespace NoteAppWPF.ViewModels
 				return _cancelCommand ??
 				       (_cancelCommand = new RelayCommand(obj =>
 				       {
+						   IsChangesAccepted = false;
 					       ((EditWindow)obj).Close();
 				       }));
 			}

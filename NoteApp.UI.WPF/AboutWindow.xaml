@@ -8,6 +8,7 @@
 	Title="AboutWindow"
 	Width="400"
 	Height="350"
+	Icon="Resources/icon.ico"
 	Background="LightGray"
 	mc:Ignorable="d">
 	<Grid Margin="12" Background="LightGray">

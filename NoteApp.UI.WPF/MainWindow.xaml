@@ -33,7 +33,8 @@
 				          CommandParameter="{Binding ElementName=Window}"/>
 			</MenuItem>
 			<MenuItem Name="HelpMenuItem" Header="Help">
-				<MenuItem Name="AboutMenuItem" Header="About" />
+				<MenuItem Name="AboutMenuItem" Header="About" 
+				          Command="{Binding AboutWindowCommand}"/>
 			</MenuItem>
 		</Menu>
 		<Grid Name="MainGrid" Background="LightGray">
@@ -75,8 +76,7 @@
 						Margin="3"
 						DisplayMemberPath="Title"
 						ItemsSource="{Binding SelectedNotes}"
-						SelectedValue="{Binding Path=SelectedValue, Mode=TwoWay}"
-						SelectedValuePath="Created" />
+						SelectedItem="{Binding SelectedValue}"/>
 					<StackPanel
 						Grid.Row="2"
 						Grid.Column="0"
@@ -96,7 +96,7 @@
 						</Button>
 						<Button
 							Name="RemoveButton"
-							Command="{Binding RemoveCommand}"
+							Command="{Binding RemoveNoteCommand}"
 							Style="{StaticResource EditingButton}">
 							<Image Source="Resources/file_delete (1).png" />
 						</Button>
