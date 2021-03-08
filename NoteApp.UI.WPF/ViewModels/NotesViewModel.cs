@@ -171,7 +171,8 @@ namespace NoteAppWPF.ViewModels
 				       (_editNoteCommand = new RelayCommand(obj =>
 				       {
 						   var note = GetNote(SelectedNote.Created);
-					       _editingNoteViewModel = new EditingNoteViewModel(SelectedNote);
+						   NoteViewModel editNote = (NoteViewModel)SelectedNote.Clone();
+					       _editingNoteViewModel = new EditingNoteViewModel(editNote);
 
 					       if (_editingNoteViewModel.IsChangesAccepted)
 					       {

@@ -152,5 +152,11 @@ namespace NoteAppWPF.ViewModels
 		/// <inheritdoc/>
 		public Note ConvertToNote() => 
 			new Note(this.Title, this.Text, this.Category, this.Created, this.Modified);
+
+		/// <inheritdoc/>
+		public object Clone()
+		{
+			return this.MemberwiseClone();
+		}
 	}
 }
