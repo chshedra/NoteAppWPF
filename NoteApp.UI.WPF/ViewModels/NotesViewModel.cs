@@ -207,7 +207,7 @@ namespace NoteAppWPF.ViewModels
 								   SelectedNote = new NoteViewModel(_model.Notes[0]);
 								   _model.CurrentNote = _model.Notes[0];
 							   }
-						   }
+						   } 
 				       }));
 			}
 		}
