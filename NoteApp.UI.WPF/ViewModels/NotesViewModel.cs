@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
+using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
@@ -19,6 +20,11 @@ namespace NoteAppWPF.ViewModels
 		/// Хранит модель представления окна редактирования
 		/// </summary>
 		private EditingNoteViewModel _editingNoteViewModel;
+
+		/// <summary>
+		/// Хранит объект сервиса 
+		/// </summary>
+		private IMessageBoxService _messageBoxService;
 
 		/// <summary>
 		/// Хранит значение выбранной заметки
@@ -132,9 +138,10 @@ namespace NoteAppWPF.ViewModels
 		/// Конструктор модели представления по модели
 		/// </summary>
 		/// <param name="notesModel">Объект модели</param>
-		public NotesViewModel(INotesModel notesModel)
+		public NotesViewModel(INotesModel notesModel, IMessageBoxService service)
 		{
 			_model = notesModel;
+			_messageBoxService = service;
 			SelectedCategory = NoteCategory.All;
 		}
 
@@ -198,8 +205,8 @@ namespace NoteAppWPF.ViewModels
 				return _removeNoteCommand ??
 				       (_removeNoteCommand = new RelayCommand(obj =>
 				       {
-						  if(MessageBox.Show("Do you really want remove this note?",
-							   "Note removing", MessageBoxButton.OKCancel) == MessageBoxResult.OK)
+						  if(_messageBoxService.Show("Do you really want to remove this note?", 
+							  "Note removing"))
 						   {
 							   _model.Notes.Remove(_model.CurrentNote);
 							   if (_model.Notes.Count != 0)

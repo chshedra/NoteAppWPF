@@ -1,6 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using NoteApp.Application.WPF.Model;
+using NoteAppWPF.Services;
 using NoteAppWPF.ViewModels;
 
 namespace NoteAppWPF
@@ -14,7 +15,7 @@ namespace NoteAppWPF
 		{
 			InitializeComponent();
 
-			this.DataContext = new NotesViewModel(new NotesModel());
+			this.DataContext = new NotesViewModel(new NotesModel(), new MessageBoxService());
 			NotesListBox.SelectedIndex = 0;
 		}
 	}
