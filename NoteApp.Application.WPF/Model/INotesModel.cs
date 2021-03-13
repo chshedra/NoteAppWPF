@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using NoteApp.DataAccess;
 
 namespace NoteApp.Application.WPF.Model

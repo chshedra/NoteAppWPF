@@ -2,12 +2,11 @@
 
 namespace NoteAppWPF.Services
 {
+	/// <inheritdoc/>
 	public class MessageBoxService : IMessageBoxService
 	{
 		public bool Show(string message, string caption) =>
 			MessageBox.Show(message, caption,
-				MessageBoxButton.OKCancel) == MessageBoxResult.OK
-				? true
-				: false;
+				MessageBoxButton.OKCancel) == MessageBoxResult.OK;
 	}
 }

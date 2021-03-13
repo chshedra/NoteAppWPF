@@ -1,10 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Collections;
 using System.Linq;
-using System.Windows;
 using NoteApp.DataAccess;
-using NoteAppWPF;
 using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
@@ -19,12 +16,12 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Хранит объект сервиса вызова окна
 		/// </summary>
-		private IWindowService _windowService;
+		private readonly IWindowService _windowService;
 
 		/// <summary>
 		/// Хранит объект сервиса вызова MessageBox
 		/// </summary>
-		private IMessageBoxService _messageBoxService;
+		private readonly IMessageBoxService _messageBoxService;
 
 		/// <summary>
 		/// Хранит команду успешного завершения операции с заметкой
@@ -102,7 +99,9 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Устанавливает значение списка заметок и текущей заметки для модели представления
 		/// </summary>
-		/// <param name="notesModel"></param>
+		/// <param name="note">Значение текущей заметки</param>
+		/// <param name="windowService">Объект сервиса вызова окон</param>
+		/// <param name="messageBoxService">Объект сервиса вызова MessageBox</param>
 		public EditingNoteViewModel(INoteViewModel note, 
 			IWindowService windowService, IMessageBoxService messageBoxService)
 		{
@@ -111,7 +110,6 @@ namespace NoteAppWPF.ViewModels
 			_windowService = windowService;
 
 			_windowService.ShowNoteWindow(this);
-
 		}
 	}
 

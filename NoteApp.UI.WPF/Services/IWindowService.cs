@@ -2,6 +2,9 @@
 
 namespace NoteAppWPF.Services
 {
+	/// <summary>
+	/// Сервис вызова окон 
+	/// </summary>
 	public interface IWindowService
 	{
 		/// <summary>
