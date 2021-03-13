@@ -1,13 +1,11 @@
 ﻿using System;
 using System.ComponentModel;
-using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
+using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
-	/// <summary>
-	/// Модель-представление выбранной заметки
-	/// </summary>
+	/// <inheritdoc cref = "INoteViewModel"/>
 	public class NoteViewModel : Notifier, INoteViewModel, IDataErrorInfo
 	{
 		/// <summary>

@@ -1,5 +1,8 @@
 ﻿namespace NoteAppWPF.ViewModels
 {
+	/// <summary>
+	/// Модель представления окна редакирования
+	/// </summary>
 	public interface IEditingNoteViewModel
 	{
 		/// <summary>

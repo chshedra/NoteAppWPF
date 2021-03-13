@@ -6,6 +6,7 @@ using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
+	/// <inheritdoc/>
 	public class EditingNoteViewModel : IEditingNoteViewModel
 	{
 		/// <summary>

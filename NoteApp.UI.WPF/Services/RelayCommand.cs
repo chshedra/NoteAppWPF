@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace NoteAppWPF
+namespace NoteAppWPF.Services
 {
 	public class RelayCommand : ICommand
 	{
-		private Action<object> _execute;
+		private readonly Action<object> _execute;
 
-		private Func<object, bool> _canExecute;
+		private readonly Func<object, bool> _canExecute;
 
 		public event EventHandler CanExecuteChanged
 		{

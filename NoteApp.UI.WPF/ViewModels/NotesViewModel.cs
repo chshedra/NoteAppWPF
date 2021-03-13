@@ -8,6 +8,7 @@ using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
+	/// <inheritdoc cref="INotesViewModel"/>
 	public class NotesViewModel : Notifier, INotesViewModel
 	{
 		/// <summary>
