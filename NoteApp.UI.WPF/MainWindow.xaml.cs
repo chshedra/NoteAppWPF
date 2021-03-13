@@ -15,7 +15,8 @@ namespace NoteAppWPF
 		{
 			InitializeComponent();
 
-			this.DataContext = new NotesViewModel(new NotesModel(), new MessageBoxService());
+			this.DataContext = new NotesViewModel(new NotesModel(), 
+				new MessageBoxService(), new WindowService());
 			NotesListBox.SelectedIndex = 0;
 		}
 	}

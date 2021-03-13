@@ -22,9 +22,14 @@ namespace NoteAppWPF.ViewModels
 		private EditingNoteViewModel _editingNoteViewModel;
 
 		/// <summary>
-		/// Хранит объект сервиса 
+		/// Хранит объект сервиса вызова MessageBox
 		/// </summary>
-		private IMessageBoxService _messageBoxService;
+		private readonly IMessageBoxService _messageBoxService;
+
+		/// <summary>
+		/// Хранит объект сервиса открытия информационного окна
+		/// </summary>
+		private readonly IWindowService _aboutWindowService;
 
 		/// <summary>
 		/// Хранит значение выбранной заметки
@@ -138,10 +143,14 @@ namespace NoteAppWPF.ViewModels
 		/// Конструктор модели представления по модели
 		/// </summary>
 		/// <param name="notesModel">Объект модели</param>
-		public NotesViewModel(INotesModel notesModel, IMessageBoxService service)
+		/// <param name="messageBoxService"> Объект сервиса вызова MessageBox</param>
+		/// <param name="windowService">Объект сервиса вызова информационного окна</param>
+		public NotesViewModel(INotesModel notesModel, IMessageBoxService messageBoxService, 
+			IWindowService windowService)
 		{
 			_model = notesModel;
-			_messageBoxService = service;
+			_messageBoxService = messageBoxService;
+			_aboutWindowService = windowService;
 			SelectedCategory = NoteCategory.All;
 		}
 
@@ -229,8 +238,7 @@ namespace NoteAppWPF.ViewModels
 				return _aboutWindowCommand ??
 				       (_aboutWindowCommand = new RelayCommand(obj =>
 					       {
-						       var window = new AboutWindow();
-							   window.Show();
+						       _aboutWindowService.Show();
 					       }
 				       ));
 			}

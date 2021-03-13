@@ -59,7 +59,9 @@
     <Compile Include="Notifier.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="Services\IMessageBoxService.cs" />
+    <Compile Include="Services\IWindowService.cs" />
     <Compile Include="Services\MessageBoxService.cs" />
+    <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\EditingNoteViewModel.cs" />
     <Compile Include="ViewModels\INotesViewModel.cs" />
     <Compile Include="ViewModels\INoteViewModel.cs" />
