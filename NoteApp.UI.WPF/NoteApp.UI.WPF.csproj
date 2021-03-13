@@ -63,6 +63,7 @@
     <Compile Include="Services\MessageBoxService.cs" />
     <Compile Include="Services\WindowService.cs" />
     <Compile Include="ViewModels\EditingNoteViewModel.cs" />
+    <Compile Include="ViewModels\IEditingNoteViewModel.cs" />
     <Compile Include="ViewModels\INotesViewModel.cs" />
     <Compile Include="ViewModels\INoteViewModel.cs" />
     <Compile Include="ViewModels\NotesViewModel.cs" />

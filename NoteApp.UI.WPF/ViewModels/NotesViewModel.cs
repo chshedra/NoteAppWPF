@@ -29,7 +29,7 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Хранит объект сервиса открытия информационного окна
 		/// </summary>
-		private readonly IWindowService _aboutWindowService;
+		private readonly IWindowService _windowService;
 
 		/// <summary>
 		/// Хранит значение выбранной заметки
@@ -150,7 +150,7 @@ namespace NoteAppWPF.ViewModels
 		{
 			_model = notesModel;
 			_messageBoxService = messageBoxService;
-			_aboutWindowService = windowService;
+			_windowService = windowService;
 			SelectedCategory = NoteCategory.All;
 		}
 
@@ -164,12 +164,14 @@ namespace NoteAppWPF.ViewModels
 				return _addNoteCommand ??
 				       (_addNoteCommand = new RelayCommand(obj =>
 				       {
-					       _editingNoteViewModel = new EditingNoteViewModel(new NoteViewModel(new Note()));
+						   _editingNoteViewModel = new EditingNoteViewModel(new NoteViewModel(new Note()), 
+							    _windowService, _messageBoxService);
 
 					       if (_editingNoteViewModel.IsChangesAccepted)
 					       {
 						       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
 						       SelectedValue = _editingNoteViewModel.CurrentNote.ConvertToNote();
+							   NotifyPropertyChanged(nameof(SelectedNote));
 						       UpdateNoteList();
 					       }
 				       }));
@@ -188,7 +190,8 @@ namespace NoteAppWPF.ViewModels
 				       {
 						   var note = GetNote(SelectedNote.Created);
 						   NoteViewModel editNote = (NoteViewModel)SelectedNote.Clone();
-					       _editingNoteViewModel = new EditingNoteViewModel(editNote);
+					       _editingNoteViewModel = 
+						       new EditingNoteViewModel(editNote, _windowService, _messageBoxService);
 
 					       if (_editingNoteViewModel.IsChangesAccepted)
 					       {
@@ -238,7 +241,7 @@ namespace NoteAppWPF.ViewModels
 				return _aboutWindowCommand ??
 				       (_aboutWindowCommand = new RelayCommand(obj =>
 					       {
-						       _aboutWindowService.Show();
+						       _windowService.ShowAboutWindow();
 					       }
 				       ));
 			}
@@ -297,6 +300,7 @@ namespace NoteAppWPF.ViewModels
 				SelectedNotes = _model.Notes;
 			}
 			NotifyPropertyChanged(nameof(SelectedNote));
+			NotifyPropertyChanged(nameof(SelectedNotes));
 		}
 	}
 }

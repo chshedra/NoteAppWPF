@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using NoteApp.Application.WPF;
+using NoteAppWPF.ViewModels;
 
 
 namespace NoteAppWPF
@@ -9,11 +10,11 @@ namespace NoteAppWPF
 	/// </summary>
 	public partial class EditWindow : Window
 	{
-		public EditWindow()
+		public EditWindow(IEditingNoteViewModel editingNoteViewModel)
 		{
 			InitializeComponent();
 
-
+			this.DataContext = editingNoteViewModel;
 		}
 	}
 }

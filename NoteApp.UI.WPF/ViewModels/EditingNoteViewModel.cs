@@ -5,15 +5,26 @@ using System.Linq;
 using System.Windows;
 using NoteApp.DataAccess;
 using NoteAppWPF;
+using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
-	public class EditingNoteViewModel
+	public class EditingNoteViewModel : IEditingNoteViewModel
 	{
 		/// <summary>
 		/// Хранит значение редактируемой/создаваемой заметки
 		/// </summary>
 		private INoteViewModel _currentNote;
+
+		/// <summary>
+		/// Хранит объект сервиса вызова окна
+		/// </summary>
+		private IWindowService _windowService;
+
+		/// <summary>
+		/// Хранит объект сервиса вызова MessageBox
+		/// </summary>
+		private IMessageBoxService _messageBoxService;
 
 		/// <summary>
 		/// Хранит команду успешного завершения операции с заметкой
@@ -24,8 +35,6 @@ namespace NoteAppWPF.ViewModels
 		/// Хранит команду отмены операции с заметкой
 		/// </summary>
 		private RelayCommand _cancelCommand;
-
-		private EditWindow _editWindow;
 
 		/// <summary>
 		/// Возвращает и устанавливает значение редактируемой/создаваемой заметки
@@ -61,16 +70,14 @@ namespace NoteAppWPF.ViewModels
 
 					       if (isError)
 					       {
-						       MessageBox.Show("Invalid values",
-							       "Warning",
-							       MessageBoxButton.OK,
-							       MessageBoxImage.Warning);
+						       _messageBoxService.Show("Title's length must be shorter, than 50 symbols",
+							       "Warning");
 					       }
 					       else
 					       {
 						       CurrentNote.Modified = DateTime.Now;
 						       IsChangesAccepted = true;
-						       _editWindow.Close();
+							   _windowService.Close();
 					       }
 				       }));
 			}
@@ -87,7 +94,7 @@ namespace NoteAppWPF.ViewModels
 				       (_cancelCommand = new RelayCommand(obj =>
 				       {
 						   IsChangesAccepted = false;
-						   _editWindow.Close();
+						   _windowService.Close();
 				       }));
 			}
 		}
@@ -96,16 +103,15 @@ namespace NoteAppWPF.ViewModels
 		/// Устанавливает значение списка заметок и текущей заметки для модели представления
 		/// </summary>
 		/// <param name="notesModel"></param>
-		public EditingNoteViewModel(INoteViewModel note)
+		public EditingNoteViewModel(INoteViewModel note, 
+			IWindowService windowService, IMessageBoxService messageBoxService)
 		{
 			CurrentNote = note;
+			_messageBoxService = messageBoxService;
+			_windowService = windowService;
 
-			_editWindow = new EditWindow
-			{
-				DataContext = this
-			};
+			_windowService.ShowNoteWindow(this);
 
-			_editWindow.ShowDialog();
 		}
 	}
 

@@ -1,11 +1,37 @@
-﻿namespace NoteAppWPF.Services
+﻿using System.Windows;
+using NoteAppWPF.ViewModels;
+
+namespace NoteAppWPF.Services
 {
 	public class WindowService : IWindowService
 	{
-		public void Show()
+		/// <summary>
+		/// Хранит объект окна редактирования
+		/// </summary>
+		private EditWindow _editWindow;
+
+		/// <inheritdoc/>
+		public bool NoteWindowResult { get; set; }
+
+		/// <inheritdoc/>
+		public void ShowAboutWindow()
 		{
-			AboutWindow window = new AboutWindow();
-			window.Show();
+			AboutWindow aboutWindow = new AboutWindow();
+			aboutWindow.Show();
 		}
+
+		/// <inheritdoc/>
+		public bool? ShowNoteWindow(IEditingNoteViewModel editingNoteViewModel)
+		{
+			 _editWindow = new EditWindow(editingNoteViewModel);
+
+			return _editWindow.ShowDialog();
+		}
+
+		public void Close()
+		{
+			_editWindow.Close();
+		}
+
 	}
 }
