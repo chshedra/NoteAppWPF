@@ -6,11 +6,9 @@ using NoteApp.DataAccess;
 namespace NoteApp.Application.WPF.Model
 {
 	/// <inheritdoc/>
+
 	public class NotesModel : INotesModel
 	{
-		/// <summary>
-		/// Хранит список заметок
-		/// </summary>
 		private ObservableCollection<Note> _notes;
 
 		/// <inheritdoc/>
@@ -31,9 +29,7 @@ namespace NoteApp.Application.WPF.Model
 		{
 			_notes = new ObservableCollection<Note>();
 
-			CurrentNote = 
-				ProjectManager.LoadFromFile(ProjectManager.DefaultPath).CurrentNote;
-
+			CurrentNote = ProjectManager.LoadFromFile(ProjectManager.DefaultPath).CurrentNote;
 			foreach (Note note
 				in ProjectManager.LoadFromFile(ProjectManager.DefaultPath).Notes)
 			{
@@ -41,11 +37,9 @@ namespace NoteApp.Application.WPF.Model
 			}
 		}
 
-		/// <inheritdoc/>
 		public void SortNotes()
 		{
-			Notes = new ObservableCollection<Note>
-				(_notes.OrderByDescending(note => note.Modified));
+			Notes = new ObservableCollection<Note>(_notes.OrderByDescending(note => note.Created));
 		}
 
 		/// <summary>
