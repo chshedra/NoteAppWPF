@@ -1,7 +1,7 @@
 ﻿namespace NoteAppWPF.ViewModels
 {
 	/// <summary>
-	/// Модель представления окна редакирования
+	/// Хранит значение редактируемой/создаваемой заметки
 	/// </summary>
 	public interface IEditingNoteViewModel
 	{

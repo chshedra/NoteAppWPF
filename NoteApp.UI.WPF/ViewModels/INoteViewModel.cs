@@ -13,7 +13,5 @@ namespace NoteAppWPF.ViewModels
 		/// </summary>
 		/// <returns>Конверитированная заметка</returns>
 		Note ConvertToNote();
-
-
 	}
 }

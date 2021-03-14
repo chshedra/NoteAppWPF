@@ -6,7 +6,7 @@
 	public interface IMessageBoxService
 	{
 		/// <summary>
-		/// Вызывает MessageBox по заданным параметрам
+		/// Реализует вызов MessageBox
 		/// </summary>
 		/// <param name="message">Сообщение MessageBox</param>
 		/// <param name="caption">Заголовок MessageBox</param>

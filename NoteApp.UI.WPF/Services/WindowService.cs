@@ -1,8 +1,8 @@
-﻿using System.Windows;
-using NoteAppWPF.ViewModels;
+﻿using NoteAppWPF.ViewModels;
 
 namespace NoteAppWPF.Services
 {
+	/// <inheritdoc cref="IWindowService"/>
 	public class WindowService : IWindowService
 	{
 		/// <summary>
