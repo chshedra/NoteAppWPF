@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
-using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {

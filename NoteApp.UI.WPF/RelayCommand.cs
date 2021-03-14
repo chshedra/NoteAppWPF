@@ -5,9 +5,9 @@ namespace NoteAppWPF
 {
 	public class RelayCommand : ICommand
 	{
-		private readonly Action<object> _execute;
+		private Action<object> _execute;
 
-		private readonly Func<object, bool> _canExecute;
+		private Func<object, bool> _canExecute;
 
 		public event EventHandler CanExecuteChanged
 		{

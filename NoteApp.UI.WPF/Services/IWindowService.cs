@@ -21,11 +21,12 @@ namespace NoteAppWPF.Services
 		/// Вызывает окно редактирования
 		/// </summary>
 		/// <param name="editingNoteViewModel">Модель представление текущей заметки</param>
-		 void ShowNoteWindow(IEditingNoteViewModel editingNoteViewModel);
+		bool? ShowNoteWindow(IEditingNoteViewModel editingNoteViewModel);
 
 		/// <summary>
 		/// Закрывает окно редактирования
 		/// </summary>
 		void Close();
+
 	}
 }

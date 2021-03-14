@@ -21,16 +21,17 @@ namespace NoteAppWPF.Services
 		}
 
 		/// <inheritdoc/>
-		public void ShowNoteWindow(IEditingNoteViewModel editingNoteViewModel)
+		public bool? ShowNoteWindow(IEditingNoteViewModel editingNoteViewModel)
 		{
 			 _editWindow = new EditWindow(editingNoteViewModel);
-			 _editWindow.Show();
+
+			return _editWindow.ShowDialog();
 		}
 
-		/// <inheritdoc/>
 		public void Close()
 		{
 			_editWindow.Close();
 		}
+
 	}
 }
