@@ -5,9 +5,7 @@ using NoteApp.DataAccess;
 
 namespace NoteAppWPF.ViewModels
 {
-	/// <summary>
-	/// Модель-представление выбранной заметки
-	/// </summary>
+	/// <inheritdoc cref="INotesViewModel"/>
 	public class NoteViewModel : Notifier, INoteViewModel, IDataErrorInfo
 	{
 		/// <summary>

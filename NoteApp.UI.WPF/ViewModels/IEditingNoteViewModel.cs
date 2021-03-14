@@ -1,5 +1,8 @@
 ﻿namespace NoteAppWPF.ViewModels
 {
+	/// <summary>
+	/// Хранит значение редактируемой/создаваемой заметки
+	/// </summary>
 	public interface IEditingNoteViewModel
 	{
 		/// <summary>

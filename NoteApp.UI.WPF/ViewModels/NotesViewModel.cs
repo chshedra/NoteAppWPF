@@ -2,13 +2,13 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
 using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
 {
+	/// <inheritdoc cref="INotesViewModel"/>
 	public class NotesViewModel : Notifier, INotesViewModel
 	{
 		/// <summary>
