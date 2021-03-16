@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace NoteAppWPF.Services
 {
+	//TODO: XML комментарии?
 	public class RelayCommand : ICommand
 	{
 		private readonly Action<object> _execute;

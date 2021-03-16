@@ -10,7 +10,7 @@ namespace NoteApp.DataAccess
 		/// <summary>
 		/// Устанавливает и возвращает список объектов класса Note
 		/// </summary>
-		public List<Note> Notes { get; set; } = new List<Note>();
+		public List<Note> Notes { get; set; }
 
 		/// <summary>
 		/// Возвращает и устанавливает значение текущей заметки
@@ -24,6 +24,7 @@ namespace NoteApp.DataAccess
 		/// <param name="currentNote">Текущая заметка</param>
 		public Project(List<Note> notes, Note currentNote)
 		{
+			//TODO: Сейчас получается, что новая запись и текущая никак не связаны внутри контекста. Т.е. список может быть один, а запись может даже не входить в этот список.
 			Notes = notes;
 			CurrentNote = currentNote;
 		}

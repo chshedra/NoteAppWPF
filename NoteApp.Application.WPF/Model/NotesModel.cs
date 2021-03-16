@@ -9,14 +9,14 @@ namespace NoteApp.Application.WPF.Model
 
 	public class NotesModel : INotesModel
 	{
+		//TODO: Автосвойство?
 		private ObservableCollection<Note> _notes;
 
 		/// <inheritdoc/>
 		public ObservableCollection<Note> Notes
 		{
 			get => _notes;
-
-			set => _notes = value;
+            set => _notes = value;
 		}
 
 		/// <inheritdoc/>
@@ -29,6 +29,7 @@ namespace NoteApp.Application.WPF.Model
 		{
 			_notes = new ObservableCollection<Note>();
 
+			//TODO: Неплохо, загружаем проект 2 раза...
 			CurrentNote = ProjectManager.LoadFromFile(ProjectManager.DefaultPath).CurrentNote;
 			foreach (Note note
 				in ProjectManager.LoadFromFile(ProjectManager.DefaultPath).Notes)

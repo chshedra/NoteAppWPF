@@ -115,6 +115,7 @@ namespace NoteAppWPF.ViewModels
 			Update(note);
 		}
 
+		//TODO: XML комментарии?
 		public string this[string columnName]
 		{
 			get
@@ -125,6 +126,7 @@ namespace NoteAppWPF.ViewModels
 					case nameof(Title):
 						if (Title.Length > 50)
 						{
+							//TODO: А в других местах на английском текст....
 							return "Размер заголовка должен быть не более 50 символов";
 						}
 						break;
@@ -132,6 +134,7 @@ namespace NoteAppWPF.ViewModels
 				return error;
 			}
 		}
+		//TODO: Так должно быть?
 		public string Error => throw new NotImplementedException();
 
 		/// <summary>

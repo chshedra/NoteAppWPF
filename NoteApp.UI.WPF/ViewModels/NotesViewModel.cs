@@ -123,8 +123,10 @@ namespace NoteAppWPF.ViewModels
 			{
 				SelectedNotes = value == NoteCategory.All
 					? SelectedNotes = _model.Notes
-					: new ObservableCollection<Note>(_model.Notes.Where(note => note.Category == value)
-						.Select(note => note).OrderByDescending(note => note.Created));
+					: new ObservableCollection<Note>(_model.Notes
+                        .Where(note => note.Category == value)
+						.Select(note => note)
+                        .OrderByDescending(note => note.Created));
 
 				_selectedCategory = value;
 				NotifyPropertyChanged(nameof(SelectedNotes));

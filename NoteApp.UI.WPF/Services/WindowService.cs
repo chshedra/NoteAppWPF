@@ -10,6 +10,7 @@ namespace NoteAppWPF.Services
 		/// </summary>
 		private EditWindow _editWindow;
 
+		//TODO: Не используется?
 		/// <inheritdoc/>
 		public bool NoteWindowResult { get; set; }
 
