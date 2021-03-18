@@ -3,6 +3,7 @@ using NoteApp.DataAccess;
 
 namespace NoteApp.Application.WPF
 {
+	//TODO: Название не отражает назначения евент-аргумента
 	/// <summary>
 	/// Аргументы события изменения заметки
 	/// </summary>

@@ -107,6 +107,7 @@ namespace NoteApp.DataAccess
         /// </summary>
         public Note()
         {
+	        //TODO: В цепочку конструкторов, чтобы убрать дублирование
             Title = "Без названия";
             Text = null;
             Category = NoteCategory.Other;

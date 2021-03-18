@@ -26,6 +26,7 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static void SaveToFile(Project project, string filename)
         {
+	        //TODO: RSDN
 			string DefaultDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
 				"\\NoteApp";
 
@@ -47,7 +48,8 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static Project LoadFromFile(string filename)
 		{
-            Project project;
+			//TODO: много лишнего - можно сразу возвращать project, а не тащить его до конца метода
+			Project project;
 
 			try
 			{
@@ -58,7 +60,7 @@ namespace NoteApp.DataAccess
 				else
 				{
 					JsonSerializer serializer = new JsonSerializer();
-
+					//TODO: Отступы и скобочки
 					using (StreamReader sr = new StreamReader(filename))
 					using (JsonReader reader = new JsonTextReader(sr))
 					{

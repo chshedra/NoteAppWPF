@@ -115,6 +115,7 @@ namespace NoteAppWPF.ViewModels
 			Update(note);
 		}
 
+		//TODO: XML комментарии?
 		public string this[string columnName]
 		{
 			get
@@ -132,6 +133,7 @@ namespace NoteAppWPF.ViewModels
 				return error;
 			}
 		}
+		//TODO: Так должно быть?
 		public string Error => throw new NotImplementedException();
 
 		/// <summary>

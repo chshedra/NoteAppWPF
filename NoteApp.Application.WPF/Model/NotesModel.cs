@@ -9,6 +9,7 @@ namespace NoteApp.Application.WPF.Model
 
 	public class NotesModel : INotesModel
 	{
+		//TODO: Автосвойство?
 		private ObservableCollection<Note> _notes;
 
 		/// <inheritdoc/>

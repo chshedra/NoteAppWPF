@@ -24,6 +24,7 @@ namespace NoteApp.DataAccess
 		/// <param name="currentNote">Текущая заметка</param>
 		public Project(List<Note> notes, Note currentNote)
 		{
+			//TODO: Сейчас получается, что новая запись и текущая никак не связаны внутри контекста. Т.е. список может быть один, а запись может даже не входить в этот список.
 			Notes = notes;
 			CurrentNote = currentNote;
 		}
