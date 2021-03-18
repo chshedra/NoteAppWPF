@@ -126,6 +126,7 @@ namespace NoteAppWPF.ViewModels
 					case nameof(Title):
 						if (Title.Length > 50)
 						{
+							//TODO: Отступы и скобочки
 							return "Размер заголовка должен быть не более 50 символов";
 						}
 						break;
