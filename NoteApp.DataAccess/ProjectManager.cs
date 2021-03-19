@@ -49,8 +49,6 @@ namespace NoteApp.DataAccess
 		public static Project LoadFromFile(string filename)
 		{
 			//TODO: +много лишнего - можно сразу возвращать project, а не тащить его до конца метода
-			Project project;
-
 			try
 			{
 				if (!File.Exists(filename))
