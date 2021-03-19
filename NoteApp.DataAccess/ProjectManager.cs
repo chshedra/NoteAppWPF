@@ -26,13 +26,13 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static void SaveToFile(Project project, string filename)
         {
-	        //TODO: RSDN
-			string DefaultDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
+	        //TODO: +RSDN
+			string defaultDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
 				"\\NoteApp";
 
-			if (!Directory.Exists(DefaultDirectory))
+			if (!Directory.Exists(defaultDirectory))
 			{
-				Directory.CreateDirectory(DefaultDirectory);
+				Directory.CreateDirectory(defaultDirectory);
 			}
 
 			JsonSerializer serializer = new JsonSerializer();
@@ -48,35 +48,31 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static Project LoadFromFile(string filename)
 		{
-			//TODO: много лишнего - можно сразу возвращать project, а не тащить его до конца метода
+			//TODO: +много лишнего - можно сразу возвращать project, а не тащить его до конца метода
 			Project project;
 
 			try
 			{
 				if (!File.Exists(filename))
 				{
-					project = new Project();
+					return new Project();
 				}
-				else
+				
+				JsonSerializer serializer = new JsonSerializer();
+				//TODO: +Отступы и скобочки
+				using (StreamReader sr = new StreamReader(filename))
 				{
-					JsonSerializer serializer = new JsonSerializer();
-					//TODO: Отступы и скобочки
-					using (StreamReader sr = new StreamReader(filename))
 					using (JsonReader reader = new JsonTextReader(sr))
 					{
-						project = (Project)serializer.Deserialize<Project>(reader);
+						return serializer.Deserialize<Project>(reader);
 					}
 				}
+			
 			}
 			catch(JsonException)
             {
-                project = new Project();
+                return new Project();
 			}
-			if(project == null)
-			{
-				project = new Project();
-			}
-			return project;
 		}
 	}
 }

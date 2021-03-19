@@ -9,16 +9,9 @@ namespace NoteApp.Application.WPF.Model
 
 	public class NotesModel : INotesModel
 	{
-		//TODO: Автосвойство?
-		private ObservableCollection<Note> _notes;
-
+		//TODO: +Автосвойство?
 		/// <inheritdoc/>
-		public ObservableCollection<Note> Notes
-		{
-			get => _notes;
-
-			set => _notes = value;
-		}
+		public ObservableCollection<Note> Notes { get; set; }
 
 		/// <inheritdoc/>
 		public Note CurrentNote { get; set; }
@@ -28,19 +21,22 @@ namespace NoteApp.Application.WPF.Model
 		/// </summary>
 		public NotesModel()
 		{
-			_notes = new ObservableCollection<Note>();
+			Notes = new ObservableCollection<Note>();
 
-			CurrentNote = ProjectManager.LoadFromFile(ProjectManager.DefaultPath).CurrentNote;
+			var project = ProjectManager.LoadFromFile(ProjectManager.DefaultPath);
+
+			//TODO: +Неплохо, загружаем проект 2 раза...
+			CurrentNote = project.CurrentNote;
 			foreach (Note note
-				in ProjectManager.LoadFromFile(ProjectManager.DefaultPath).Notes)
+				in project.Notes)
 			{
-				_notes.Add(note);
+				Notes.Add(note);
 			}
 		}
 
 		public void SortNotes()
 		{
-			Notes = new ObservableCollection<Note>(_notes.OrderByDescending(note => note.Created));
+			Notes = new ObservableCollection<Note>(Notes.OrderByDescending(note => note.Created));
 		}
 
 		/// <summary>

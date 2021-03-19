@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using NoteApp.DataAccess;
+using NoteAppWPF.Common;
 using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels

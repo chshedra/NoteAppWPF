@@ -105,15 +105,10 @@ namespace NoteApp.DataAccess
         /// Конструктор без параметров, устанавливает значения полей Название, Текст заметки, 
         /// Категория, Время создания ,Время изменения
         /// </summary>
-        public Note()
-        {
-	        //TODO: В цепочку конструкторов, чтобы убрать дублирование
-            Title = "Без названия";
-            Text = null;
-            Category = NoteCategory.Other;
-            Created = DateTime.Now;
-        }
+        public Note() : this("Без названия", null, NoteCategory.Other,
+	        DateTime.Now, DateTime.Now){}
 
+        //+TODO: В цепочку конструкторов, чтобы убрать дублирование
         /// <summary>
         /// Метод, задающий условия сравнения коллекций
         /// </summary>

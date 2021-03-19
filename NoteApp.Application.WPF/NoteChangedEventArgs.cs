@@ -3,11 +3,11 @@ using NoteApp.DataAccess;
 
 namespace NoteApp.Application.WPF
 {
-	//TODO: Название не отражает назначения евент-аргумента
+	//TODO: +Название не отражает назначения евент-аргумента
 	/// <summary>
 	/// Аргументы события изменения заметки
 	/// </summary>
-	public class NoteEventArgs : EventArgs
+	public class NoteChangedEventArgs : EventArgs
 	{
 		/// <summary>
 		/// Измененная заметка
@@ -18,7 +18,7 @@ namespace NoteApp.Application.WPF
 		/// Устанавливает значение измененной заметки в аргументы
 		/// </summary>
 		/// <param name="note">Измененная заметка</param>
-		public NoteEventArgs(INote note)
+		public NoteChangedEventArgs(INote note)
 		{
 			Note = note;
 		}

@@ -28,6 +28,7 @@ namespace NoteAppWPF.Services
 			return _editWindow.ShowDialog();
 		}
 
+		/// <inheritdoc/>
 		public void Close()
 		{
 			_editWindow.Close();

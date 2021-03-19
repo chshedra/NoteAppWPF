@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
+using NoteAppWPF.Common;
 
 namespace NoteAppWPF.ViewModels
 {
@@ -115,7 +116,12 @@ namespace NoteAppWPF.ViewModels
 			Update(note);
 		}
 
-		//TODO: XML комментарии?
+		//TODO: +XML комментарии?
+		/// <summary>
+		/// Проверяет присваевоемое свойству значение
+		/// </summary>
+		/// <param name="columnName">Проверяемое свойство</param>
+		/// <returns>Сообщение об ошибке</returns>
 		public string this[string columnName]
 		{
 			get
@@ -126,7 +132,7 @@ namespace NoteAppWPF.ViewModels
 					case nameof(Title):
 						if (Title.Length > 50)
 						{
-							//TODO: Отступы и скобочки
+							//TODO:+ Отступы и скобочки
 							return "Размер заголовка должен быть не более 50 символов";
 						}
 						break;
@@ -134,7 +140,7 @@ namespace NoteAppWPF.ViewModels
 				return error;
 			}
 		}
-		//TODO: Так должно быть?
+		//TODO: +Так должно быть? - Да
 		public string Error => throw new NotImplementedException();
 
 		/// <summary>

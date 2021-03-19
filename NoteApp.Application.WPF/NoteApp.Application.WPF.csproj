@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\INotesModel.cs" />
-    <Compile Include="NoteEventArgs.cs" />
+    <Compile Include="NoteChangedEventArgs.cs" />
     <Compile Include="Model\NotesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mime;
+using System.Windows;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
+using NoteAppWPF.Common;
 using NoteAppWPF.Services;
 
 namespace NoteAppWPF.ViewModels
@@ -86,7 +89,6 @@ namespace NoteAppWPF.ViewModels
 				{
 					_selectedNote = new NoteViewModel(value);
 					NotifyPropertyChanged(nameof(SelectedNote));
-					_model.CurrentNote = _selectedNote.ConvertToNote();
 				}
 			}
 		}
@@ -127,8 +129,8 @@ namespace NoteAppWPF.ViewModels
 						.Select(note => note).OrderByDescending(note => note.Created));
 
 				_selectedCategory = value;
-				NotifyPropertyChanged(nameof(SelectedNotes));
 				SelectedNote = new NoteViewModel(SelectedNotes[0]);
+				NotifyPropertyChanged(nameof(SelectedNotes));
 				NotifyPropertyChanged(nameof(SelectedNote));
 			}
 		}
@@ -152,6 +154,7 @@ namespace NoteAppWPF.ViewModels
 			_messageBoxService = messageBoxService;
 			_windowService = windowService;
 			SelectedCategory = NoteCategory.All;
+			UpdateNoteList();
 		}
 
 		/// <summary>
@@ -259,11 +262,6 @@ namespace NoteAppWPF.ViewModels
 				       {
 					       ProjectManager.SaveToFile(new Project(_model.Notes.ToList(), _model.CurrentNote), 
 						       ProjectManager.DefaultPath);
-
-					       if (obj != null)
-					       {
-						       ((MainWindow) obj).Close();
-					       }
 				       }));
 			}
 		}

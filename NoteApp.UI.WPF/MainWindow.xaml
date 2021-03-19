@@ -24,8 +24,7 @@
 		<Menu Height="20" DockPanel.Dock="Top">
 			<MenuItem Name="FileMenuItem" Header="File">
 				<MenuItem Name="ExitMenuItem" Header="Exit"
-				          Command="{Binding ExitCommand}"
-				          CommandParameter="{Binding ElementName=Window}"/>
+				          Command="{Binding ExitCommand}"/>
 			</MenuItem>
 			<MenuItem Name="EditHeadMenuItem" Header="Edit">
 				<MenuItem Name="AddMenuItem" Header="Add" 
