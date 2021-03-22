@@ -6,7 +6,6 @@ using NoteApp.DataAccess;
 namespace NoteApp.Application.WPF.Model
 {
 	/// <inheritdoc/>
-
 	public class NotesModel : INotesModel
 	{
 		//TODO: +Автосвойство?
@@ -34,20 +33,12 @@ namespace NoteApp.Application.WPF.Model
 			}
 		}
 
+		/// <summary>
+		/// Сортирует список заметок по времени изменения
+		/// </summary>
 		public void SortNotes()
 		{
-			Notes = new ObservableCollection<Note>(Notes.OrderByDescending(note => note.Created));
-		}
-
-		/// <summary>
-		/// Получает заметку из списка по дате создания
-		/// </summary>
-		/// <param name="created">Искомая дата создвния</param>
-		/// <returns>Найденная заметка</returns>
-		private Note GetNote(DateTime created)
-		{
-			return Notes.FirstOrDefault(
-				note => note.Created == created);
+			Notes = new ObservableCollection<Note>(Notes.OrderByDescending(note => note.Modified));
 		}
 	}
 }

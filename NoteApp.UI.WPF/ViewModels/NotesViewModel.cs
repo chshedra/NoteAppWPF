@@ -128,7 +128,11 @@ namespace NoteAppWPF.ViewModels
 						.Select(note => note).OrderByDescending(note => note.Created));
 
 				_selectedCategory = value;
-				SelectedNote = new NoteViewModel(SelectedNotes[0]);
+
+				SelectedNote = SelectedNotes.Count <= 0
+				? new NoteViewModel(new Note())
+				: new NoteViewModel(SelectedNotes[0]);
+
 				RaisePropertyChanged(nameof(SelectedNotes));
 				RaisePropertyChanged(nameof(SelectedNote));
 			}
