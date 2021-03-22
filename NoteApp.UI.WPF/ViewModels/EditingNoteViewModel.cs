@@ -2,8 +2,8 @@
 using System.Collections;
 using System.Linq;
 using NoteApp.DataAccess;
-using NoteAppWPF.Common;
 using NoteAppWPF.Services;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace NoteAppWPF.ViewModels
 {
@@ -28,7 +28,7 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Хранит команду успешного завершения операции с заметкой
 		/// </summary>
-		private RelayCommand _okCommand;
+		private RelayCommand<bool> _okCommand;
 
 		/// <summary>
 		/// Хранит команду отмены операции с заметкой
@@ -58,12 +58,12 @@ namespace NoteAppWPF.ViewModels
 		/// <summary>
 		/// Возвращает команду успешного завершения операции с заметкой
 		/// </summary>
-		public RelayCommand OkCommand
+		public RelayCommand<bool> OkCommand
 		{
 			get
 			{
 				return _okCommand ??
-				       (_okCommand = new RelayCommand(obj =>
+				       (_okCommand = new RelayCommand<bool>(obj =>
 				       {
 					       var isError = (bool)obj;
 
@@ -90,7 +90,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _cancelCommand ??
-				       (_cancelCommand = new RelayCommand(obj =>
+				       (_cancelCommand = new RelayCommand(() =>
 				       {
 						   IsChangesAccepted = false;
 						   _windowService.Close();

@@ -2,17 +2,16 @@
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Net.Mime;
-using System.Windows;
 using NoteApp.Application.WPF.Model;
 using NoteApp.DataAccess;
-using NoteAppWPF.Common;
 using NoteAppWPF.Services;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 
 namespace NoteAppWPF.ViewModels
 {
 	/// <inheritdoc cref="INotesViewModel"/>
-	public class NotesViewModel : Notifier, INotesViewModel
+	public class NotesViewModel : ViewModelBase, INotesViewModel
 	{
 		/// <summary>
 		/// Хранит объект модели 
@@ -88,7 +87,7 @@ namespace NoteAppWPF.ViewModels
 				else
 				{
 					_selectedNote = new NoteViewModel(value);
-					NotifyPropertyChanged(nameof(SelectedNote));
+					RaisePropertyChanged(nameof(SelectedNote));
 				}
 			}
 		}
@@ -130,8 +129,8 @@ namespace NoteAppWPF.ViewModels
 
 				_selectedCategory = value;
 				SelectedNote = new NoteViewModel(SelectedNotes[0]);
-				NotifyPropertyChanged(nameof(SelectedNotes));
-				NotifyPropertyChanged(nameof(SelectedNote));
+				RaisePropertyChanged(nameof(SelectedNotes));
+				RaisePropertyChanged(nameof(SelectedNote));
 			}
 		}
 
@@ -165,7 +164,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _addNoteCommand ??
-				       (_addNoteCommand = new RelayCommand(obj =>
+				       (_addNoteCommand = new RelayCommand(() =>
 				       {
 						   _editingNoteViewModel = new EditingNoteViewModel(new NoteViewModel(new Note()), 
 							    _windowService, _messageBoxService);
@@ -174,7 +173,7 @@ namespace NoteAppWPF.ViewModels
 					       {
 						       _model.Notes.Add(_editingNoteViewModel.CurrentNote.ConvertToNote());
 						       SelectedValue = _editingNoteViewModel.CurrentNote.ConvertToNote();
-							   NotifyPropertyChanged(nameof(SelectedNote));
+							   RaisePropertyChanged(nameof(SelectedNote));
 						       UpdateNoteList();
 					       }
 				       }));
@@ -189,7 +188,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _editNoteCommand ??
-				       (_editNoteCommand = new RelayCommand(obj =>
+				       (_editNoteCommand = new RelayCommand(() =>
 				       {
 						   var note = GetNote(SelectedNote.Created);
 						   NoteViewModel editNote = (NoteViewModel)SelectedNote.Clone();
@@ -218,7 +217,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _removeNoteCommand ??
-				       (_removeNoteCommand = new RelayCommand(obj =>
+				       (_removeNoteCommand = new RelayCommand(() =>
 				       {
 						  if(_messageBoxService.Show("Do you really want to remove this note?", 
 							  "Note removing"))
@@ -242,7 +241,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _aboutWindowCommand ??
-				       (_aboutWindowCommand = new RelayCommand(obj =>
+				       (_aboutWindowCommand = new RelayCommand(() =>
 					       {
 						       _windowService.ShowAboutWindow();
 					       }
@@ -258,7 +257,7 @@ namespace NoteAppWPF.ViewModels
 			get
 			{
 				return _exitCommand ??
-				       (_exitCommand = new RelayCommand(obj =>
+				       (_exitCommand = new RelayCommand(() =>
 				       {
 					       ProjectManager.SaveToFile(new Project(_model.Notes.ToList(), _model.CurrentNote), 
 						       ProjectManager.DefaultPath);
@@ -297,8 +296,8 @@ namespace NoteAppWPF.ViewModels
 			{
 				SelectedNotes = _model.Notes;
 			}
-			NotifyPropertyChanged(nameof(SelectedNote));
-			NotifyPropertyChanged(nameof(SelectedNotes));
+			RaisePropertyChanged(nameof(SelectedNote));
+			RaisePropertyChanged(nameof(SelectedNotes));
 		}
 	}
 }

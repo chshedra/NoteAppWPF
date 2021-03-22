@@ -1,13 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
-using NoteApp.Application.WPF;
 using NoteApp.DataAccess;
-using NoteAppWPF.Common;
+using GalaSoft.MvvmLight;
 
 namespace NoteAppWPF.ViewModels
 {
 	/// <inheritdoc cref="INotesViewModel"/>
-	public class NoteViewModel : Notifier, INoteViewModel, IDataErrorInfo
+	public class NoteViewModel : ViewModelBase, INoteViewModel, IDataErrorInfo
 	{
 		/// <summary>
 		/// Хранит значение заголовка выбранной заметки
@@ -44,7 +43,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_title = value;
-				NotifyPropertyChanged(nameof(Title));
+				RaisePropertyChanged(nameof(Title));
 			}
 		}
 
@@ -57,7 +56,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_text = value;
-				NotifyPropertyChanged(nameof(Text));
+				RaisePropertyChanged(nameof(Text));
 			}
 		}
 
@@ -70,7 +69,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_category = value;
-				NotifyPropertyChanged(nameof(Category));
+				RaisePropertyChanged(nameof(Category));
 			}
 		}
 
@@ -84,7 +83,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_created = value;
-				NotifyPropertyChanged(nameof(Created));
+				RaisePropertyChanged(nameof(Created));
 			}
 		}
 
@@ -98,7 +97,7 @@ namespace NoteAppWPF.ViewModels
 			set
 			{
 				_modified = value;
-				NotifyPropertyChanged(nameof(Modified));
+				RaisePropertyChanged(nameof(Modified));
 			}
 		}
 
