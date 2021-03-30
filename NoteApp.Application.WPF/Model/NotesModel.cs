@@ -8,7 +8,7 @@ namespace NoteApp.Application.WPF.Model
 	/// <inheritdoc/>
 	public class NotesModel : INotesModel
 	{
-		//TODO: +Автосвойство?
+		//TODO: Нужен паблик сет?
 		/// <inheritdoc/>
 		public ObservableCollection<Note> Notes { get; set; }
 
@@ -24,10 +24,8 @@ namespace NoteApp.Application.WPF.Model
 
 			var project = ProjectManager.LoadFromFile(ProjectManager.DefaultPath);
 
-			//TODO: +Неплохо, загружаем проект 2 раза...
 			CurrentNote = project.CurrentNote;
-			foreach (Note note
-				in project.Notes)
+			foreach (Note note in project.Notes)
 			{
 				Notes.Add(note);
 			}

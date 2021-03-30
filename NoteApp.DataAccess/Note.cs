@@ -108,7 +108,6 @@ namespace NoteApp.DataAccess
         public Note() : this("Без названия", null, NoteCategory.Other,
 	        DateTime.Now, DateTime.Now){}
 
-        //+TODO: В цепочку конструкторов, чтобы убрать дублирование
         /// <summary>
         /// Метод, задающий условия сравнения коллекций
         /// </summary>

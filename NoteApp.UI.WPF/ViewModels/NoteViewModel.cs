@@ -115,7 +115,6 @@ namespace NoteAppWPF.ViewModels
 			Update(note);
 		}
 
-		//TODO: +XML комментарии?
 		/// <summary>
 		/// Проверяет присваевоемое свойству значение
 		/// </summary>
@@ -131,7 +130,6 @@ namespace NoteAppWPF.ViewModels
 					case nameof(Title):
 						if (Title.Length > 50)
 						{
-							//TODO:+ Отступы и скобочки
 							return "Размер заголовка должен быть не более 50 символов";
 						}
 						break;
@@ -139,7 +137,9 @@ namespace NoteAppWPF.ViewModels
 				return error;
 			}
 		}
+
 		//TODO: +Так должно быть? - Да
+		//TODO: В большинстве источников, которые я посмотрел, кидают null или string.empty, а вы кидаете исключение, ничем не черевато?
 		public string Error => throw new NotImplementedException();
 
 		/// <summary>

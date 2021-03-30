@@ -3,12 +3,13 @@ using NoteApp.DataAccess;
 
 namespace NoteApp.Application.WPF
 {
-	//TODO: +Название не отражает назначения евент-аргумента
+	//TODO: Почему не используется?
 	/// <summary>
 	/// Аргументы события изменения заметки
 	/// </summary>
 	public class NoteChangedEventArgs : EventArgs
 	{
+		//TODO: Нужен паблик сет?
 		/// <summary>
 		/// Измененная заметка
 		/// </summary>

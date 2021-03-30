@@ -7,6 +7,8 @@ namespace NoteApp.DataAccess
 	/// </summary>
 	public class Project
 	{
+		//TODO: Какой смысл в инициализации, если в конструкторе идёт присваивание?
+		//TODO: Нужен паблик сет?
 		/// <summary>
 		/// Устанавливает и возвращает список объектов класса Note
 		/// </summary>
@@ -24,8 +26,7 @@ namespace NoteApp.DataAccess
 		/// <param name="currentNote">Текущая заметка</param>
 		public Project(List<Note> notes, Note currentNote)
 		{
-			//TODO: +Сейчас получается, что новая запись и текущая никак не связаны внутри контекста. Т.е. список может быть один, а запись может даже не входить в этот список.
-
+			//TODO: Упрощённую запись через ?? посмотрите
 			Notes = notes != null
 				? notes 
 				: new List<Note>() ;

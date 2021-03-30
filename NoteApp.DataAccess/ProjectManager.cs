@@ -48,7 +48,6 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static Project LoadFromFile(string filename)
 		{
-			//TODO: +много лишнего - можно сразу возвращать project, а не тащить его до конца метода
 			try
 			{
 				if (!File.Exists(filename))
@@ -57,7 +56,6 @@ namespace NoteApp.DataAccess
 				}
 				
 				JsonSerializer serializer = new JsonSerializer();
-				//TODO: +Отступы и скобочки
 				using (StreamReader sr = new StreamReader(filename))
 				{
 					using (JsonReader reader = new JsonTextReader(sr))

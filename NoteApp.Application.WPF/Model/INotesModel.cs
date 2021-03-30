@@ -12,12 +12,12 @@ namespace NoteApp.Application.WPF.Model
 		/// <summary>
 		/// Возвращает и устанавливает список заметок
 		/// </summary>
-		ObservableCollection<Note> Notes { get; set; }
+		ObservableCollection<Note> Notes { get; }
 
 		/// <summary>
 		/// Устанавливает и возвращает значение текущей заметки
 		/// </summary>
-		Note CurrentNote { get; set;}
+		Note CurrentNote { get; set; }
 
 		/// <summary>
 		/// Добавляет новую заметку и сортирует список
