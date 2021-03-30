@@ -12,22 +12,7 @@
 	Icon="Resources/icon.ico"
 	mc:Ignorable="d">
 	<Window.Resources>
-		<Style x:Key="ErrorValidationStyle">
-			<Style.Triggers>
-				<Trigger Property="Validation.HasError" Value="True">
-					<Setter Property="TextBox.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
-					<Setter Property="TextBox.ToolTip" Value="Test"></Setter>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style TargetType="Button">
-			<Style.Triggers>
-				<Trigger Property="Validation.HasError" Value="True">
-					<Setter Property="IsEnabled" Value="False"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-
+		<ResourceDictionary Source="NoteAppResourceDictionary.xaml" />
 	</Window.Resources>
 	<Grid Margin="6">
 		<Grid.ColumnDefinitions>
@@ -46,20 +31,17 @@
 		<TextBlock
 			Grid.Row="0"
 			Grid.Column="0"
-			Margin="3"
-			VerticalAlignment="Center"
+			Style="{StaticResource CenterControlStyle}"
 			Text="Title:" />
 		<TextBlock
 			Grid.Row="1"
 			Grid.Column="0"
-			Margin="3"
-			VerticalAlignment="Center"
+			Style="{StaticResource CenterControlStyle}"
 			Text="Category:" />
 		<TextBlock
 			Grid.Row="2"
 			Grid.Column="0"
-			Margin="3"
-			VerticalAlignment="Center"
+			Style="{StaticResource CenterControlStyle}"
 			Text="Created:" />
 		<TextBox
 			Name="EditingTitleTextBox"
@@ -67,8 +49,6 @@
 			Grid.Column="1"
 			Grid.ColumnSpan="3"
 			Height="25"
-			Margin="3"
-			VerticalAlignment="Center"
 			Style="{StaticResource ErrorValidationStyle}">
 			<TextBox.Text>
 				<Binding Path="CurrentNote.Title" UpdateSourceTrigger="PropertyChanged">
@@ -84,30 +64,26 @@
 			Grid.Column="1"
 			Grid.ColumnSpan="2"
 			Width="150"
-			Margin="3"
-			HorizontalAlignment="Left"
+			Style="{StaticResource LeftControlStyle}"
 			ItemsSource="{Binding Categories}"
 			SelectedItem="{Binding CurrentNote.Category}" />
 		<DatePicker
 			Name="CreatedDatePicker"
 			Grid.Row="2"
 			Grid.Column="1"
-			Margin="3"
-			HorizontalAlignment="Left"
+			Style="{StaticResource LeftControlStyle}"
 			IsEnabled="False"
 			SelectedDate="{Binding CurrentNote.Created}" />
 		<TextBlock
 			Grid.Row="2"
 			Grid.Column="2"
-			Margin="3"
-			VerticalAlignment="Center"
+			Style="{StaticResource CenterControlStyle}"
 			Text="Modified:" />
 		<DatePicker
 			Name="ModifiedDatePicker"
 			Grid.Row="2"
 			Grid.Column="3"
-			Margin="3"
-			HorizontalAlignment="Left"
+			Style="{StaticResource LeftControlStyle}"
 			IsEnabled="False"
 			SelectedDate="{Binding CurrentNote.Modified}" />
 		<TextBox
@@ -128,15 +104,13 @@
 			Orientation="Horizontal">
 			<Button
 				Name="CancelButton"
-				Width="60"
-				Margin="3"
+				Style ="{StaticResource OkCancelButtonStyle}"
 				Command="{Binding CancelCommand}"
 				CommandParameter="{Binding ElementName=Window}"
 				Content="Cancel" />
 			<Button
 				Name="OkButton"
-				Width="60"
-				Margin="3"
+				Style="{StaticResource OkCancelButtonStyle}"
 				Command="{Binding OkCommand}"
 				CommandParameter="{Binding Path=(Validation.HasError), ElementName=EditingTitleTextBox, Mode=OneWay}"
 				Content="OK" />

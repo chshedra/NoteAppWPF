@@ -1,10 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteApp.DataAccess
 {
@@ -27,8 +23,8 @@ namespace NoteApp.DataAccess
 		public static void SaveToFile(Project project, string filename)
         {
 	        //TODO: +RSDN
-			string defaultDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
-				"\\NoteApp";
+			string defaultDirectory = Environment.GetFolderPath(Environment.
+				                          SpecialFolder.ApplicationData) + "\\NoteApp";
 
 			if (!Directory.Exists(defaultDirectory))
 			{

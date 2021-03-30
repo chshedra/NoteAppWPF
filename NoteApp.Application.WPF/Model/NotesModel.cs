@@ -8,9 +8,9 @@ namespace NoteApp.Application.WPF.Model
 	/// <inheritdoc/>
 	public class NotesModel : INotesModel
 	{
-		//TODO: Нужен паблик сет?
+		//TODO: +Нужен паблик сет?
 		/// <inheritdoc/>
-		public ObservableCollection<Note> Notes { get; set; }
+		public ObservableCollection<Note> Notes { get; private set; }
 
 		/// <inheritdoc/>
 		public Note CurrentNote { get; set; }
@@ -36,7 +36,8 @@ namespace NoteApp.Application.WPF.Model
 		/// </summary>
 		public void SortNotes()
 		{
-			Notes = new ObservableCollection<Note>(Notes.OrderByDescending(note => note.Modified));
+			Notes = new ObservableCollection<Note>(Notes.
+				OrderByDescending(note => note.Modified));
 		}
 	}
 }

@@ -138,9 +138,9 @@ namespace NoteAppWPF.ViewModels
 			}
 		}
 
-		//TODO: +Так должно быть? - Да
-		//TODO: В большинстве источников, которые я посмотрел, кидают null или string.empty, а вы кидаете исключение, ничем не черевато?
-		public string Error => throw new NotImplementedException();
+		//TODO: +Так должно быть? - Нет
+		//TODO: +В большинстве источников, которые я посмотрел, кидают null или string.empty, а вы кидаете исключение, ничем не черевато?
+		public string Error => string.Empty;
 
 		/// <summary>
 		/// Обновляет свойства выбранной заметки

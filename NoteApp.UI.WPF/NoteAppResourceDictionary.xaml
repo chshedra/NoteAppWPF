@@ -2,12 +2,44 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:local="clr-namespace:NoteAppWPF">
-	<Style x:Key="EditingButton">
+	<Style x:Key="EditingButtonStyle">
 		<Setter Property="Button.Margin" Value="3" />
 		<Setter Property="Button.HorizontalAlignment" Value="Left" />
 		<Setter Property="Button.Width" Value="30" />
 		<Setter Property="Border.BorderThickness" Value="0" />
 		<Setter Property="Button.Background" Value="LightGray" />
+	</Style>
+
+	<Style x:Key="OkCancelButtonStyle">
+		<Setter Property="Button.Width" Value="60"/>
+		<Setter Property="Button.Margin" Value="3"/>
+	</Style>
+
+	<Style x:Key="CenterControlStyle">
+		<Setter Property="Control.VerticalAlignment" Value="Center" />
+		<Setter Property="Control.Margin" Value="3" />
+	</Style>
+
+	<Style x:Key="LeftControlStyle">
+		<Setter Property="Control.HorizontalAlignment" Value="Left" />
+		<Setter Property="Control.Margin" Value="3" />
+	</Style>
+
+	<Style x:Key="ErrorValidationStyle">
+		<Style.Triggers>
+			<Trigger Property="Validation.HasError" Value="True">
+				<Setter Property="TextBox.ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+				<Setter Property="TextBox.ToolTip" Value="Test" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="Button">
+		<Style.Triggers>
+			<Trigger Property="Validation.HasError" Value="True">
+				<Setter Property="IsEnabled" Value="False" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 
 </ResourceDictionary>

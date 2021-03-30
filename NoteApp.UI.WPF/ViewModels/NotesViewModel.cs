@@ -194,20 +194,23 @@ namespace NoteAppWPF.ViewModels
 				return _editNoteCommand ??
 				       (_editNoteCommand = new RelayCommand(() =>
 				       {
-						   var note = GetNote(SelectedNote.Created);
-						   NoteViewModel editNote = (NoteViewModel)SelectedNote.Clone();
-					       _editingNoteViewModel = 
-						       new EditingNoteViewModel(editNote, _windowService, _messageBoxService);
-
-					       if (_editingNoteViewModel.IsChangesAccepted)
+					       if (_model.Notes.Count > 0)
 					       {
-						       var editingNoteIndex = SelectedNotes.IndexOf(note);
-						       _model.Notes.Insert(editingNoteIndex + 1,
-							       _editingNoteViewModel.CurrentNote.ConvertToNote());
-							   SelectedNote = _editingNoteViewModel.CurrentNote;
+						       var note = GetNote(SelectedNote.Created);
+						       NoteViewModel editNote = (NoteViewModel) SelectedNote.Clone();
+						       _editingNoteViewModel =
+							       new EditingNoteViewModel(editNote, _windowService, _messageBoxService);
 
-						       _model.Notes.Remove(note);
-							   UpdateNoteList();
+						       if (_editingNoteViewModel.IsChangesAccepted)
+						       {
+							       var editingNoteIndex = SelectedNotes.IndexOf(note);
+							       _model.Notes.Insert(editingNoteIndex + 1,
+								       _editingNoteViewModel.CurrentNote.ConvertToNote());
+							       SelectedNote = _editingNoteViewModel.CurrentNote;
+
+							       _model.Notes.Remove(note);
+							       UpdateNoteList();
+						       }
 					       }
 				       }));
 			}
@@ -223,16 +226,19 @@ namespace NoteAppWPF.ViewModels
 				return _removeNoteCommand ??
 				       (_removeNoteCommand = new RelayCommand(() =>
 				       {
-						  if(_messageBoxService.Show("Do you really want to remove this note?", 
-							  "Note removing"))
-						   {
-							   _model.Notes.Remove(_model.CurrentNote);
-							   if (_model.Notes.Count != 0)
-							   {
-								   SelectedNote = new NoteViewModel(_model.Notes[0]);
-								   _model.CurrentNote = _model.Notes[0];
-							   }
-						   }
+					       if (_model.Notes.Count > 0)
+					       {
+						       if (_messageBoxService.Show("Do you really want to remove this note?",
+							       "Note removing"))
+						       {
+							       _model.Notes.Remove(_model.CurrentNote);
+							       if (_model.Notes.Count != 0)
+							       {
+								       SelectedNote = new NoteViewModel(_model.Notes[0]);
+								       _model.CurrentNote = _model.Notes[0];
+							       }
+						       }
+					       }
 				       }));
 			}
 		}

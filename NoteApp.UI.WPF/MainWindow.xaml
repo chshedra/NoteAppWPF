@@ -90,19 +90,19 @@
 						<Button
 							Name="AddButton"
 							Command="{Binding AddNoteCommand}"
-							Style="{StaticResource EditingButton}">
+							Style="{StaticResource EditingButtonStyle}">
 							<Image Source="Resources/file_add (1).png" Stretch="Uniform" />
 						</Button>
 						<Button
 							Name="EditButton"
 							Command="{Binding EditNoteCommand}"
-							Style="{StaticResource EditingButton}">
+							Style="{StaticResource EditingButtonStyle}">
 							<Image Source="Resources/file_edit (1).png" />
 						</Button>
 						<Button
 							Name="RemoveButton"
 							Command="{Binding RemoveNoteCommand}"
-							Style="{StaticResource EditingButton}">
+							Style="{StaticResource EditingButtonStyle}">
 							<Image Source="Resources/file_delete (1).png" />
 						</Button>
 					</StackPanel>
