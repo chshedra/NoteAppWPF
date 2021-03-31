@@ -102,7 +102,7 @@ namespace NoteAppWPF.ViewModels
 
 			set
 			{
-				if (value.Created == DateTime.MinValue)
+				if (value == null || value.Created == DateTime.MinValue)
 				{
 					return;
 				}
@@ -130,7 +130,8 @@ namespace NoteAppWPF.ViewModels
 				_selectedCategory = value;
 
 				SelectedNote = SelectedNotes.Count <= 0
-				? new NoteViewModel(new Note())
+				? new NoteViewModel(new Note(null, null, NoteCategory.Other, 
+					DateTime.MinValue, DateTime.MinValue))
 				: new NoteViewModel(SelectedNotes[0]);
 
 				RaisePropertyChanged(nameof(SelectedNotes));
@@ -236,6 +237,10 @@ namespace NoteAppWPF.ViewModels
 							       {
 								       SelectedNote = new NoteViewModel(_model.Notes[0]);
 								       _model.CurrentNote = _model.Notes[0];
+							       }
+							       else
+							       {
+								       SelectedNote = new NoteViewModel(new Note());
 							       }
 						       }
 					       }

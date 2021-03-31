@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using NoteApp.DataAccess;
 
 namespace NoteApp.DataAccess
 {
@@ -28,13 +27,11 @@ namespace NoteApp.DataAccess
         /// <inheritdoc/>
         public string Title
         {
-            get
-            {
-                return _title;
-            }
+            get => _title;
+
             set
             {
-                if(value.Length > 50)
+                if(value != null && value.Length > 50 )
                 {
                     throw new ArgumentException("Размер имени заметки должен быть " +
                         "менее 50 символов. " + "Текущий размер:" + value.Length);
@@ -61,10 +58,8 @@ namespace NoteApp.DataAccess
         /// <inheritdoc/>
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get => _text;
+
             set
             {
                 _text = value;
