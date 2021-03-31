@@ -7,8 +7,6 @@ namespace NoteApp.DataAccess
 	/// </summary>
 	public class Project
 	{
-		//TODO: +Какой смысл в инициализации, если в конструкторе идёт присваивание?
-		//TODO: +Нужен паблик сет?
 		/// <summary>
 		/// Устанавливает и возвращает список объектов класса Note
 		/// </summary>
@@ -26,8 +24,7 @@ namespace NoteApp.DataAccess
 		/// <param name="currentNote">Текущая заметка</param>
 		public Project(List<Note> notes, Note currentNote)
 		{
-			//TODO: +Упрощённую запись через ?? посмотрите
-			Notes = notes ?? new List<Note>() ;
+			Notes = notes ?? new List<Note>();
 
 			CurrentNote = notes != null && notes.Contains(currentNote)
 				? currentNote

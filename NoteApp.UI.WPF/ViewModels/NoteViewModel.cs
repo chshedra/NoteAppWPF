@@ -138,8 +138,6 @@ namespace NoteAppWPF.ViewModels
 			}
 		}
 
-		//TODO: +Так должно быть? - Нет
-		//TODO: +В большинстве источников, которые я посмотрел, кидают null или string.empty, а вы кидаете исключение, ничем не черевато?
 		public string Error => string.Empty;
 
 		/// <summary>

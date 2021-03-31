@@ -8,7 +8,6 @@ namespace NoteApp.Application.WPF.Model
 	/// <inheritdoc/>
 	public class NotesModel : INotesModel
 	{
-		//TODO: +Нужен паблик сет?
 		/// <inheritdoc/>
 		public ObservableCollection<Note> Notes { get; private set; }
 

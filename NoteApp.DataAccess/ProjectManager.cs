@@ -22,7 +22,7 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static void SaveToFile(Project project, string filename)
         {
-	        //TODO: +RSDN
+			//TODO: Дублируется с DefaultPath
 			string defaultDirectory = Environment.GetFolderPath(Environment.
 				                          SpecialFolder.ApplicationData) + "\\NoteApp";
 
@@ -32,6 +32,7 @@ namespace NoteApp.DataAccess
 			}
 
 			JsonSerializer serializer = new JsonSerializer();
+			//TODO: Отступы и скобочки
 			using (StreamWriter sw = new StreamWriter(filename))
             using (JsonWriter writer = new JsonTextWriter(sw))
 			{ 
