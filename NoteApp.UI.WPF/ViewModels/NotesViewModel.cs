@@ -299,8 +299,6 @@ namespace NoteAppWPF.ViewModels
 				SelectedNotes = new ObservableCollection<Note>(_model.Notes.
 					Where(note => note.Category == SelectedCategory)
 					.Select(note => note).OrderByDescending(note => note.Created));
-
-
 			}
 			else
 			{
