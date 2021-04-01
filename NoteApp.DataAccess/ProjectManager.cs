@@ -22,7 +22,6 @@ namespace NoteApp.DataAccess
 		/// </summary>
 		public static void SaveToFile(Project project, string filename)
         {
-			//TODO: +Дублируется с DefaultPath
 			string defaultDirectory = Path.GetDirectoryName(DefaultPath);
 
 			if (!Directory.Exists(defaultDirectory))
@@ -31,7 +30,7 @@ namespace NoteApp.DataAccess
 			}
 
 			JsonSerializer serializer = new JsonSerializer();
-			//TODO: +Отступы и скобочки
+
 			using (StreamWriter sw = new StreamWriter(filename))
 			{
 				using (JsonWriter writer = new JsonTextWriter(sw))
