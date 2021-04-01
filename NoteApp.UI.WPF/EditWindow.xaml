@@ -9,6 +9,8 @@
 	Title="EditWindow"
 	Width="650"
 	Height="450"
+	MinHeight="450"
+	MinWidth="650"
 	Icon="Resources/icon.ico"
 	mc:Ignorable="d">
 	<Window.Resources>
